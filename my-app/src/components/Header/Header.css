@@ -2,11 +2,11 @@
 .Header__container {
     display: flex;
     justify-content: space-between;
-    position: fixed; /* Приклеиваем к экрану */
-    top: 0;          /* В самый верх */
-    left: 0;         /* В самый левый край */
-    width: 100%;     /* Растягиваем на всю ширину */
-    z-index: 100;    /* Чтобы он был поверх остального контента */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 100;
     color: #FFFF;
     background-color: #000000;
     padding-inline: 20px;

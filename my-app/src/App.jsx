@@ -1,36 +1,53 @@
 import { useState } from 'react'
-import { Route, Routes } from 'react-router-dom'
+import { Route, Routes, useNavigate } from 'react-router-dom'
 import './App.css'
 
-import Header from './Components/Header/Header'
-import LoginModal from './Components/Modals/LoginModal'
-import SignupModal from './Components/Modals/SingUpModal'
+import Header from './components/Header/Header'
+import LoginModal from './components/Modals/LoginModal'
+import SignupModal from './components/Modals/SingUpModal'
 import MainPage from './pages/MainPage'
 import SearchPage from './pages/SeachPage'
 import BookingPage from './pages/BookingPage'
+import ProfilePage from './pages/ProfilePage'
 
 
 function App() {
-  const [count, setCount] = useState(0)
+  const navigate = useNavigate();
   const [isAuth, setIsAuth] = useState(false);
   const [modalMode, setModalMode] = useState(null);
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState();
 
-  const closeModal = () => setModalMode(null);
+  const closeModal = () => {
+    setModalMode(null)
+  };
+  const onLogout = () => {
+    setUser(null);
+    navigate("/")
+  }
+
 
   return (
     <>
       <Header
-        isAuth = {isAuth}
-        user = {user}
-        OnOpenLogin = {()=> setModalMode('login')}
+        isAuth={isAuth}
+        user={user}
+        OnOpenLogin={() => setModalMode('login')}
       />
-      {modalMode == 'login' && <LoginModal onClose={()=> closeModal()}/>}
-      {modalMode == 'signup' && <SignupModal/>}
+      {modalMode == 'login' &&
+        <LoginModal
+          onClose={() => closeModal()}
+          OnOpenSignUp={() => setModalMode("signup")}
+          setUser={setUser} />}
+      {modalMode == 'signup' &&
+        <SignupModal
+          setUser={setUser}
+          onClose={() => closeModal()} />}
+
       <Routes>
-        <Route path="/" element={<MainPage/>}/>
-        <Route path="booking" element={<SearchPage/>}/>
-        <Route path="my-booking" element={<BookingPage/>}/>
+        <Route path="/" element={<MainPage />} />
+        <Route path="booking" element={<SearchPage />} />
+        <Route path="my-booking" element={<BookingPage />} />
+        <Route path='profile' element={<ProfilePage onLogout={onLogout} user={user}/>}/>
       </Routes>
     </>
   )
