@@ -1,0 +1,58 @@
+/* 1. Убираем все отступы и задаем правильный расчет размеров */
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/* 2. Настраиваем высоту для корректных фонов и центрирования */
+html, body {
+    height: 100%;
+    min-height: 100vh;
+}
+
+/* 3. Базовые настройки шрифтов и сглаживания */
+body {
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    font-family: sans-serif; /* Позже заменишь на свой шрифт */
+}
+
+/* 4. Убираем стандартные стили списков (часто мешают в навигации) */
+ul, ol {
+    list-style: none;
+}
+
+/* 5. Делаем картинки послушными */
+img, picture, video, canvas, svg {
+    display: block;
+    max-width: 100%;
+}
+
+/* 6. Убираем стандартное оформление ссылок */
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* 7. Настройка форм (чтобы не было "кривых" шрифтов) */
+input, button, textarea, select {
+    font: inherit;
+    background: transparent;
+    border: none;
+    outline: none;
+}
+
+/* 8. Кнопки делаем кликабельными по умолчанию */
+button {
+    cursor: pointer;
+    background: none;
+}
+
+/* 9. Таблицы (на всякий случай) */
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}

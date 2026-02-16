@@ -1,0 +1,72 @@
+@import url('https://fonts.googleapis.com/css2?family=Lilita+One&display=swap');
+.Header__container {
+    display: flex;
+    justify-content: space-between;
+    position: fixed; /* Приклеиваем к экрану */
+    top: 0;          /* В самый верх */
+    left: 0;         /* В самый левый край */
+    width: 100%;     /* Растягиваем на всю ширину */
+    z-index: 100;    /* Чтобы он был поверх остального контента */
+    color: #FFFF;
+    background-color: #000000;
+    padding-inline: 20px;
+    align-items: center;
+}
+
+
+
+h1{
+    font-family: "Lilita One", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 50px;
+}
+
+
+span{
+    color: #FFFF;
+}
+
+.links--container {
+    display: flex;
+    align-items: center;
+}
+
+.link--item{
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    fill: #FFF;
+    transition: transform 0.2s ease-in-out;
+}
+
+.link--item:not(:last-child) {
+    border-right: 2px solid #FFFFFF;
+    padding-right: 20px;
+}
+
+.link--icon{
+    height: 40px;
+}
+
+
+.link--content {
+    display: flex;
+    align-items: center;
+    transition: transform 0.2s ease-in-out, color 0.2s ease;
+}
+
+.link--item:hover .link--content {
+    transform: scale(1.1);
+    color: #0088FF;
+    fill: #0088FF;
+}
+
+
+
+.link--item:hover span {
+    color: inherit;
+}
+a, button {
+    outline: none;
+}

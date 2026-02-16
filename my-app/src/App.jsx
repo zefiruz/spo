@@ -1,33 +1,37 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import { Route, Routes } from 'react-router-dom'
 import './App.css'
+
+import Header from './Components/Header/Header'
+import LoginModal from './Components/Modals/LoginModal'
+import SignupModal from './Components/Modals/SingUpModal'
+import MainPage from './pages/MainPage'
+import SearchPage from './pages/SeachPage'
+import BookingPage from './pages/BookingPage'
+
 
 function App() {
   const [count, setCount] = useState(0)
+  const [isAuth, setIsAuth] = useState(false);
+  const [modalMode, setModalMode] = useState(null);
+  const [user, setUser] = useState(null);
+
+  const closeModal = () => setModalMode(null);
 
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <Header
+        isAuth = {isAuth}
+        user = {user}
+        OnOpenLogin = {()=> setModalMode('login')}
+      />
+      {modalMode == 'login' && <LoginModal onClose={()=> closeModal()}/>}
+      {modalMode == 'signup' && <SignupModal/>}
+      <Routes>
+        <Route path="/" element={<MainPage/>}/>
+        <Route path="booking" element={<SearchPage/>}/>
+        <Route path="my-booking" element={<BookingPage/>}/>
+      </Routes>
     </>
   )
 }
