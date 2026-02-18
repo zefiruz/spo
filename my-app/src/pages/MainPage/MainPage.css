@@ -1,0 +1,291 @@
+:root {
+    --primary-blue: #0088FF;
+    --hover-blue: #0076D6;
+    --gray-text: #888;
+    --border-color: #ccc;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden; /* Самое важное: запрещает любой скролл */
+    position: fixed;  /* Дополнительная страховка для мобильных устройств */
+}
+
+/* 1. Layout & Typography */
+.main-container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: calc(100vh - 80px);
+    box-sizing: border-box;
+    text-align: center;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    
+}
+
+.main-container h2 { 
+    font-size: 3.5rem; 
+    margin-bottom: 15px;
+
+    user-select: none;
+    cursor: default;
+}
+.main-container p { 
+    font-size: 1.7rem;
+    margin-bottom: 40px;
+    user-select: none;
+    cursor: default; 
+}
+
+.content-wrapper { display: inline-block; }
+
+/* 2. Search Bar Core */
+.search-bar {
+    display: inline-flex;
+    align-items: center;
+    width: 90%;
+    min-width: 600px;
+    height: 85px;
+    background: white;
+    border-radius: 60px;
+    padding: 8px 8px 8px 30px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    border: 1px solid var(--border-color);
+
+    position: relative;
+}
+
+.search-item {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+    padding: 0 25px;
+    cursor: pointer;
+}
+
+.search-item:not(:last-child) { border-right: 1px solid #eee; }
+
+/* 3. Inputs & Labels */
+.search-item label {
+    display: block;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--gray-text);
+    margin-bottom: 4px;
+    text-align: left;
+    transform-origin: left center;
+    transition: 0.2s ease;
+}
+
+.search-item input, .custom-datepicker-input {
+    border: none !important;
+    outline: none !important;
+    font-size: 19px !important;
+    font-weight: 500 !important;
+    background: transparent !important;
+    color: #000 !important;
+    width: 100%;
+    padding: 0;
+    cursor: pointer !important;
+}
+
+.search-item input::selection{
+    background: transparent; 
+}
+
+/* Состояние фокуса */
+.search-item:focus-within label {
+    color: var(--primary-blue);
+    transform: scale(1);
+}
+
+/* 4. Layout Fractions */
+.first-quarter, .second-quarter { flex: 1; }
+.half-width {
+    flex: 2;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding-right: 0;
+}
+
+.input-group { 
+    display: flex; 
+    flex-direction: column; 
+    text-align: left; 
+    flex: 1;
+}
+
+.input-group input {
+    cursor: pointer !important;
+}
+
+.input-group input::selection {
+    background: transparent;    /* Делаем выделение невидимым */
+}
+
+/* 5. Button Styles */
+.search-btn-circle {
+    background-color: var(--primary-blue);
+    color: white;
+    border: none;
+    width: 68px;
+    height: 68px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 24px;
+    flex-shrink: 0;
+    margin-right: 2px;
+
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), background-color 0.3s ease;
+}
+
+.search-btn-circle:hover {
+    background-color: var(--hover-blue);
+    transform: rotate(15deg) scale(1.05);
+}
+
+.search-icon-svg {
+    width: 26px;  /* Подбери размер под свою кнопку */
+    height: 26px;
+    /* Если иконка внутри файла имеет stroke="currentColor" или fill="currentColor" */
+    /* то строчка ниже будет работать: */
+    color: white; 
+    
+    pointer-events: none; /* Чтобы клик проходил сквозь иконку на кнопку */
+}
+
+/* 6. Datepicker Override */
+.react-datepicker {
+    font-family: inherit !important;
+    border-radius: 20px !important;
+    border: none !important;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.15) !important;
+    padding: 10px !important;
+}
+
+.react-datepicker__header { background: white !important; border: none !important; }
+
+.react-datepicker__current-month { 
+    font-size: 1rem !important; 
+    margin-bottom: 15px !important; 
+}
+
+.react-datepicker__day-name { color: #bbb !important; }
+
+.react-datepicker__day--selected {
+    background-color: var(--primary-blue) !important;
+    border-radius: 50% !important;
+}
+
+/* Подсветка дней внутри выбранного диапазона */
+.react-datepicker__day--in-range {
+    background-color: rgba(0, 136, 255, 0.1) !important;
+    color: var(--primary-blue) !important;
+    border-radius: 0 !important;
+}
+
+/* Скругление только для начала и конца диапазона */
+.react-datepicker__day--range-start,
+.react-datepicker__day--range-end {
+    background-color: var(--primary-blue) !important;
+    color: white !important;
+    border-radius: 50% !important;
+}
+
+.react-datepicker-popper {
+    transform: translateY(85px) !important;
+}
+
+.react-datepicker__triangle {
+    display: none !important;
+}
+
+.guests-modal {
+    position: absolute;
+    top: 100%; /* Появляется сразу под блоком */
+    left: 0;
+    margin-top: 15px; /* Тот же отступ, что мы делали для календаря */
+    width: 280px;
+    background: white;
+    border-radius: 20px;
+    padding: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    z-index: 1000;
+    align-items: flex-start;
+    text-align: left;
+    user-select: none;
+}
+
+.guest-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+}
+
+.counter {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.counter button {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: 1px solid var(--border-color);
+    background: white;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.counter button:hover {
+    border-color: var(--primary-blue);
+    color: var(--primary-blue);
+}
+
+/* Отключаем выделение текста на кнопках счетчика */
+.counter span, .counter button {
+    user-select: none;
+}
+
+.guest-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.guest-info span{
+    color: #000000 !important;
+}
+
+.guest-info small {
+    color: #888;
+    font-size: 12px;
+}
+
+.counter {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Немного уменьшим зазор, так как элементов стало больше */
+}
+
+.count-number {
+    font-weight: 600;
+    min-width: 20px;
+    text-align: center;
+    color: #000;
+}
+
+/* При наведении на кнопки можно подсвечивать соответствующие ярлыки (опционально) */
+.counter button:hover ~ .counter-label {
+    color: var(--primary-blue);
+}

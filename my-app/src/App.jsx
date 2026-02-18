@@ -4,16 +4,15 @@ import './App.css'
 
 import Header from './components/Header/Header'
 import LoginModal from './components/Modals/LoginModal'
-import SignupModal from './components/Modals/SingUpModal'
-import MainPage from './pages/MainPage'
-import SearchPage from './pages/SeachPage'
+import SignupModal from './components/Modals/SignUpModal'
+import MainPage from './pages/MainPage/MainPage'
+import SearchPage from './pages/SearchPage'
 import BookingPage from './pages/BookingPage'
 import ProfilePage from './pages/ProfilePage'
 
 
 function App() {
   const navigate = useNavigate();
-  const [isAuth, setIsAuth] = useState(false);
   const [modalMode, setModalMode] = useState(null);
   const [user, setUser] = useState();
 
@@ -29,7 +28,6 @@ function App() {
   return (
     <>
       <Header
-        isAuth={isAuth}
         user={user}
         OnOpenLogin={() => setModalMode('login')}
       />
