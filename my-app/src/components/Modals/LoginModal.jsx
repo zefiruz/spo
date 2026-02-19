@@ -13,7 +13,6 @@ const LoginModal = ({ onClose, OnOpenSignUp }) => {
   const handlelogin = (e) => {
     e.preventDefault();
     const user = users.find(u => inputLogin === u.login);
-    alert(user);
     if (user && user.password === password) {
       login(user);
       onClose();

@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
 import './MainPage.css';
-import searchIcon from "../../assets/search.svg";
+import searchIcon from "../../lib/icons/search.svg";
 
 import { registerLocale } from "react-datepicker";
 import { ru } from 'date-fns/locale/ru';
@@ -13,7 +13,7 @@ const MainPage = () => {
     const [checkOutDate, setCheckOutDate] = useState(null);
 
     const [isGuestsOpen, setIsGuestsOpen] = useState(false);
-    const [guests, setGuests] = useState({ adults: 2, children: 0 });    
+    const [guests, setGuests] = useState({ adults: 2, children: 0 });
     const toggleGuests = () => setIsGuestsOpen(!isGuestsOpen);
 
     const [activeModal, setActiveModal] = useState(null);
@@ -44,7 +44,7 @@ const MainPage = () => {
                         <label>Заезд</label>
                         <DatePicker
                             selected={checkInDate}
-                            onChange={(date) => 
+                            onChange={(date) =>
                                 {setCheckInDate(date);
                                 setActiveModal('checkOut');}}
                             open={activeModal === 'checkIn'}
@@ -73,7 +73,7 @@ const MainPage = () => {
                         <DatePicker
                             selected={checkOutDate}
                             onChange={(date) => {
-                                setCheckOutDate(date); 
+                                setCheckOutDate(date);
                                 setActiveModal(null);
                             }}
                             open={activeModal === 'checkOut'} // Управление открытием
@@ -101,10 +101,10 @@ const MainPage = () => {
                     <div className="search-item half-width" >
                         <div className="input-group" onClick={() => toggleModal('guests')}>
                             <label>Гости</label>
-                            <input 
-                                type="text" 
-                                readOnly 
-                                value={`${guests.adults} взрослых, ${guests.children} детей`} 
+                            <input
+                                type="text"
+                                readOnly
+                                value={`${guests.adults} взрослых, ${guests.children} детей`}
                             />
                         </div>
                         <button className="search-btn-circle">
