@@ -30,13 +30,17 @@ const LoginModal = ({ onClose, OnOpenSignUp }) => {
       <div className="modal-content" onClick={(e) => e.stopPropagation()}>
         <button className="close-btn" onClick={onClose}>×</button>
         <h2>Вход</h2>
-
+        <label className='modal-input'>
+        <span>Логин</span>
         <input
           value={inputLogin}
           onChange={handleInputLoginChange}
           type="text"
           placeholder="Логин"
         />
+        </label>
+        <label  className='modal-input'>
+          <span>Пароль</span>
         <input value={password}
           onChange={handlePasswordChange}
           type={isPasswordVisible ? ("text") : ("password")}
@@ -57,8 +61,10 @@ const LoginModal = ({ onClose, OnOpenSignUp }) => {
             <line x1="1" y1="1" x2="23" y2="23" />
           </svg>)}
         </button>
-        <button type="submit" onClick={handlelogin}>Войти</button>
-        <button onClick={OnOpenSignUp}>Зарегистрироваться</button>
+        </label>
+
+        <button  className="login-btn" type="submit" onClick={handlelogin}>Войти</button>
+        <button className="sighup-btn" onClick={OnOpenSignUp}>Зарегистрироваться</button>
       </div>
     </div>
   );

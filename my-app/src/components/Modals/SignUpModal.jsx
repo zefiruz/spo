@@ -39,21 +39,24 @@ const SignUpModal = ({ onClose }) => {
     <div className="modal-overlay" onClick={onClose}>
       <div className="modal-content" onClick={(e) => e.stopPropagation()}>
         <button className="close-btn" onClick={onClose}>×</button>
-        <h2>Вход</h2>
-        <form onSubmit={handleSubmit}>
-
-          <input
-            value={inputLogin}
-            onChange={handleinputLoginChange}
-            type="text"
-            placeholder="Логин"
-          />
-          <input value={password}
-            onChange={handlePasswordChange}
-            type={isPasswordVisible ? ("text") : ("password")}
-            placeholder="Пароль"
-          />
-          <button
+        <h2>Регистрация</h2>
+          <label className='modal-input'>
+            <span>Логин</span>
+            <input
+              value={inputLogin}
+              onChange={handleinputLoginChange}
+              type="text"
+              placeholder="Логин"
+            />
+          </label>
+          <label className='modal-input'>
+            <span>Пароль</span>
+            <input value={password}
+              onChange={handlePasswordChange}
+              type={isPasswordVisible ? ("text") : ("password")}
+              placeholder="Пароль"
+            />
+                      <button
             type="button"
             onClick={() => setIsPasswordVisible(!isPasswordVisible)}
             className="password-toggle-btn"
@@ -68,10 +71,13 @@ const SignUpModal = ({ onClose }) => {
               <line x1="1" y1="1" x2="23" y2="23" />
             </svg>)}
           </button>
-          <input value={confirmPassword}
+          </label>
+
+          <label className='modal-input'>
+            <span>Подтвердите пароль</span>
+            <input value={confirmPassword}
             onChange={handleConfirmPasswordChange}
             type={isConfirmPasswordVisible ? ("text") : ("password")}
-            placeholder="Подтвердите пароль"
           />
           <button
             type="button"
@@ -88,9 +94,9 @@ const SignUpModal = ({ onClose }) => {
               <line x1="1" y1="1" x2="23" y2="23" />
             </svg>)}
           </button>
-          <button type="submit">Зарегистрироваться</button>
+          </label>
 
-        </form>
+          <button className="login-btn" type="submit" onClick={handleSubmit}>Зарегистрироваться</button>
       </div>
     </div>
   );

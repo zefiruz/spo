@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
 .modal-overlay {
   position: fixed;
   top: 0;
@@ -12,8 +14,79 @@
 }
 
 .modal-content {
+  width: 50%;
+  display: flex;
   background: white;
-  padding: 20px;
-  border-radius: 8px;
+  font-family: Inter, sans-serif;
+  padding-block: 20px;
+  padding-inline: 50px;
+  border-radius: 20px;
   position: relative;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.close-btn{
+  position: absolute;
+  font-size: 30px;
+  top: 5px;
+  right: 20px;
+}
+.modal-input{
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.modal-input span{
+  display: flex;
+  color: #000;
+  align-content: start;
+}
+
+.modal-input input{
+  display: flex;
+  color: #000;
+  padding: 5px;
+  border: #505050 1px solid;
+  border-radius: 10px;
+  align-content: start;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+  transition: all 0.3s;
+}
+
+.modal-input input:focus{
+  transform: translateY(-4px);
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
+  border-color: #0088FF;
+}
+
+.password-toggle-btn{
+  position: absolute;
+  right: 50px;
+}
+.login-btn{
+    margin-top:10px;
+}
+.login-btn, .sighup-btn{
+  background-color: #0088FF;
+  padding-block: 5px;
+  padding-inline: 10px;
+  color: #FFFF;
+  border-radius: 5px;
+  transition: all 0.3s;
+}
+
+.sighup-btn{
+  color:#0088FF;
+  background-color: white;
+  border: 2px #0088FF solid;
+}
+
+.login-btn:hover{
+  background-color: #016fcf;
+}
+
+.sighup-btn:hover{
+  background-color: #dadada;
 }
