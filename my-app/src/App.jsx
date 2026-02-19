@@ -5,8 +5,8 @@ import { initLocalStorage } from './utils/initData'
 
 import Header from './components/Header/Header'
 import LoginModal from './components/Modals/LoginModal'
-import SignupModal from './components/Modals/SingUpModal'
-import MainPage from './pages/MainPage'
+import SignupModal from './components/Modals/SignUpModal'
+import MainPage from './pages/MainPage/MainPage'
 import SearchPage from './pages/SearchPage'
 import BookingPage from './pages/BookingPage'
 import ProfilePage from './pages/ProfilePage'
@@ -50,7 +50,7 @@ function App() {
         <Route path="/" element={<MainPage />} />
         <Route path="booking" element={<SearchPage />} />
         <Route path="my-booking" element={<BookingPage />} />
-        <Route path='profile' element={<ProfilePage onLogout={onLogout} user={user}/>}/>
+        <Route path='profile' element={<ProfilePage onLogout={onLogout} user={user} />} />
       </Routes>
     </>
   )

@@ -10,23 +10,23 @@ const SearchPage = () => {
     const { getFilteredRooms } = useRooms();
 
 
-// const searchFilters = {
-//     startDate: "2026-06-05",
-//     endDate: "2026-06-12",
-//     minPrice: 3000,
-//     maxPrice: 20000,
-//     guests: 2
-// };
+    // const searchFilters = {
+    //     startDate: "2026-06-05",
+    //     endDate: "2026-06-12",
+    //     minPrice: 3000,
+    //     maxPrice: 20000,
+    //     guests: 2
+    // };
 
-const availableRooms = getFilteredRooms();
+    const availableRooms = getFilteredRooms();
     const room = new Reservation(
-            3,
-            "Семейный номер",
-            "Две комнаты и детская кровать",
-            "Family",
-            8000,
-            3, 3, 4,
-            [
+        3,
+        "Семейный номер",
+        "Две комнаты и детская кровать",
+        "Family",
+        8000,
+        3, 3, 4,
+        [
             {
                 start: "2026-06-01",
                 end: "2026-06-10",
@@ -40,8 +40,8 @@ const availableRooms = getFilteredRooms();
                 status: "pending"
             }
         ]
-        );
-    return(<div>
+    );
+    return (<div>
         SeachPage
         {availableRooms.map(room => (
             <SearchCard key={room.id} room={room} />
