@@ -1,18 +1,20 @@
 import useLocalStorage from '../../hooks/useLocalStorage';
+import {useAuth} from '../../context/AuthContext'
 import './Modal.css'
 import { useState } from 'react';
 
 
-const SignUpModal = ({ onClose, setUser }) => {
+const SignUpModal = ({ onClose }) => {
   const [users, setUsers] = useLocalStorage("users", []);
-  const [login, setLogin] = useState();
+  const [inputLogin, setinputLogin] = useState();
+  const {login} = useAuth();
   const [password, setPassword] = useState();
   const [confirmPassword, setConfirmPassword] = useState();
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
   const [isConfirmPasswordVisible, setIsConfirmPasswordVisible] = useState(false);
   const handleSubmit = (e) => {
     e.preventDefault();
-    const isExistUser = users.some(u => login == u.login);
+    const isExistUser = users.some(u => inputLogin == u.login);
     if (isExistUser) {
       alert("Этот логин уже занят");
       return
@@ -23,14 +25,14 @@ const SignUpModal = ({ onClose, setUser }) => {
     }
     const newUser = {
       id: Date.now(), // полезно иметь ID
-      login: login,
+      login: inputLogin,
       password: password
     };
     setUsers([...users, newUser]);
-    setUser(newUser);
+    login(newUser);
     onClose();
   }
-  const handleLoginChange = (e) => { setLogin(e.target.value) }
+  const handleinputLoginChange = (e) => { setinputLogin(e.target.value) }
   const handlePasswordChange = (e) => { setPassword(e.target.value) }
   const handleConfirmPasswordChange = (e) => { setConfirmPassword(e.target.value) }
   return (
@@ -41,8 +43,8 @@ const SignUpModal = ({ onClose, setUser }) => {
         <form onSubmit={handleSubmit}>
 
           <input
-            value={login}
-            onChange={handleLoginChange}
+            value={inputLogin}
+            onChange={handleinputLoginChange}
             type="text"
             placeholder="Логин"
           />

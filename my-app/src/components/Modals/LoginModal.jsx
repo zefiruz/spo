@@ -1,25 +1,28 @@
 import useLocalStorage from '../../hooks/useLocalStorage';
+import { useAuth } from '../../context/AuthContext'
 import './Modal.css'
 import { useState } from 'react';
 
 
-const LoginModal = ({ onClose, OnOpenSignUp, setUser }) => {
+const LoginModal = ({ onClose, OnOpenSignUp }) => {
   const [users, setUsers] = useLocalStorage("users", []);
-  const [login, setLogin] = useState();
+  const { login } = useAuth();
+  const [inputLogin, setInputLogin] = useState();
   const [password, setPassword] = useState();
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
   const handlelogin = (e) => {
     e.preventDefault();
-    const user = users.find(u => login === u.login);
+    const user = users.find(u => inputLogin === u.login);
+    alert(user);
     if (user && user.password === password) {
-      setUser(user);
+      login(user);
       onClose();
       return
     }
     alert("Неверный логин или пароль")
   }
-  const handleLoginChange = (e) => {
-    setLogin(e.target.value)
+  const handleInputLoginChange = (e) => {
+    setInputLogin(e.target.value)
   }
   const handlePasswordChange = (e) => { setPassword(e.target.value) }
   return (
@@ -29,8 +32,8 @@ const LoginModal = ({ onClose, OnOpenSignUp, setUser }) => {
         <h2>Вход</h2>
 
         <input
-          value={login}
-          onChange={handleLoginChange}
+          value={inputLogin}
+          onChange={handleInputLoginChange}
           type="text"
           placeholder="Логин"
         />

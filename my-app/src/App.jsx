@@ -1,21 +1,25 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Route, Routes, useNavigate } from 'react-router-dom'
 import './App.css'
+import { initLocalStorage } from './utils/initData'
 
 import Header from './components/Header/Header'
 import LoginModal from './components/Modals/LoginModal'
 import SignupModal from './components/Modals/SingUpModal'
 import MainPage from './pages/MainPage'
-import SearchPage from './pages/SeachPage'
+import SearchPage from './pages/SearchPage'
 import BookingPage from './pages/BookingPage'
 import ProfilePage from './pages/ProfilePage'
 
 
 function App() {
+  useEffect(() => {
+    initLocalStorage();
+  }, []);
   const navigate = useNavigate();
-  const [isAuth, setIsAuth] = useState(false);
   const [modalMode, setModalMode] = useState(null);
   const [user, setUser] = useState();
+
 
   const closeModal = () => {
     setModalMode(null)
@@ -29,7 +33,6 @@ function App() {
   return (
     <>
       <Header
-        isAuth={isAuth}
         user={user}
         OnOpenLogin={() => setModalMode('login')}
       />
