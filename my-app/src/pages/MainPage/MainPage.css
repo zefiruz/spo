@@ -5,15 +5,6 @@
     --border-color: #ccc;
 }
 
-html, body {
-    margin: 0;
-    padding: 0;
-    width: 100%;
-    height: 100%;
-    overflow: hidden; /* Самое важное: запрещает любой скролл */
-    position: fixed;  /* Дополнительная страховка для мобильных устройств */
-}
-
 /* 1. Layout & Typography */
 .main-container {
     display: flex;

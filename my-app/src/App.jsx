@@ -9,7 +9,7 @@ import SignupModal from './components/Modals/SignUpModal'
 import MainPage from './pages/MainPage/MainPage'
 import SearchPage from './pages/SearchPage'
 import BookingPage from './pages/BookingPage'
-import ProfilePage from './pages/ProfilePage'
+import ProfilePage from './pages/ProfilePage/ProfilePage'
 
 
 function App() {

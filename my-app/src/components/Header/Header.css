@@ -57,7 +57,7 @@ span{
 }
 
 .link--item:hover .link--content {
-    transform: scale(1.1);
+    transform: scale(1.03);
     color: #0088FF;
     fill: #0088FF;
 }
