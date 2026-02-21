@@ -1,0 +1,182 @@
+/* Группировка контейнеров */
+.profile-container, .profile-card, .profile-sidebar, .info-item {
+    display: flex;
+}
+
+.profile-container {
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 80vh;
+}
+
+.profile-card {
+    background: #fff;
+    width: 100%;
+    max-width: 900px;
+    border-radius: 24px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+    overflow: hidden;
+}
+
+/* Колонки */
+.profile-sidebar {
+    flex: 1;
+    flex-direction: column;
+    align-items: center;
+    padding: 40px;
+    background: #f0f4f8;
+    border-right: 1px solid #eee;
+}
+
+.profile-main {
+    flex: 2;
+    padding: 40px;
+}
+
+/* Аватар и заголовки */
+.avatar-wrapper {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-bottom: 20px;
+    border: 5px solid #fff;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.profile-avatar {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.profile-display-name {
+    font: 700 1.5rem sans-serif;
+    color: #333;
+    margin-bottom: 30px;
+}
+
+/* Сетка инпутов */
+.info-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+}
+
+.info-item {
+    flex-direction: column;
+}
+
+.full-width { grid-column: span 2; }
+
+/* Общие стили для полей */
+.info-item label {
+    font-size: 0.85rem;
+    color: #777;
+    margin: 0 0 8px 4px;
+}
+
+.info-item input {
+    padding: 12px 16px;
+    border: 1.5px solid #eee;
+    border-radius: 12px;
+    font-size: 1rem;
+    transition: 0.2s;
+}
+
+.info-item input:focus {
+    outline: none;
+    border-color: #007bff;
+}
+
+.readonly-input {
+    background: #f5f5f5;
+    color: #888;
+    cursor: not-allowed;
+}
+
+/* Кнопки */
+button {
+    cursor: pointer;
+    transition: 0.3s;
+    border-radius: 10px;
+    font-weight: 600;
+}
+
+.logout-btn {
+    margin-top: 30px;
+    background: none;
+    border: 1px solid #ff4d4f;
+    color: #ff4d4f;
+    padding: 10px 20px;
+}
+
+.logout-btn:hover {
+    background: #ff4d4f;
+    color: #fff;
+}
+
+.save-profile-btn {
+    margin-top: 30px;
+    background: #0088FF;
+    color: #fff;
+    border: none;
+    padding: 14px 28px;
+    border-radius: 12px;
+}
+
+.save-profile-btn:hover {
+    background: #0076D6;
+    transform: scale(1.01);
+}
+
+.stats-section {
+    margin-top: 40px;
+    border-top: 1px solid #eee;
+    padding-top: 30px;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* 4 колонки в ряд */
+    gap: 15px;
+    margin-top: 15px;
+}
+
+.stat-card {
+    background: #f8fafc;
+    padding: 20px 15px;
+    border-radius: 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    transition: transform 0.3s ease;
+}
+
+.stat-value {
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: #222;
+    line-height: 1;
+    margin-bottom: 5px;
+}
+
+.stat-label {
+    font-size: 0.75rem;
+    color: #777;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* Цветовые акценты для статусов */
+.stat-card.confirmed .stat-value { color: #2ecc71; } /* Зеленый */
+.stat-card.cancelled .stat-value { color: #e74c3c; } /* Красный */
+.stat-card.finished .stat-value { color: #3498db; }  /* Синий */
+
+/* Адаптивность для мобильных */
+@media (max-width: 600px) {
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr); /* 2x2 на маленьких экранах */
+    }
+}

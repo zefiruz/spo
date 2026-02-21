@@ -5,12 +5,7 @@
     --border-color: #ccc;
 }
 
-
-.no-scroll{
-    overflow: hidden;
-}
-
-.main-container{
+html, body {
     display: flex;
     justify-content: center;
     align-items: flex-start;
