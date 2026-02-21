@@ -12,11 +12,9 @@ registerLocale('ru', ru);
 
 const MainPage = () => {
     const navigate = useNavigate();
-    // Извлекаем нужные функции из контекста.
-    // Исправлена опечатка: было setFileres, стало updateFilters (как в твоем контексте)
+
     const { filters, updateFilters } = useFilters();
 
-    // Локальные состояния для дат (чтобы инпуты были "быстрыми")
     const [checkInDate, setCheckInDate] = useState(filters.startDate);
     const [checkOutDate, setCheckOutDate] = useState(filters.endDate);
 

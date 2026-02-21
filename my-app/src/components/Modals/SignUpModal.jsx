@@ -40,6 +40,9 @@ const SignUpModal = ({ onClose }) => {
       <div className="modal-content" onClick={(e) => e.stopPropagation()}>
         <button className="close-btn" onClick={onClose}>×</button>
         <h2>Регистрация</h2>
+        <form onSubmit={handleSubmit}>
+
+
           <label className='modal-input'>
             <span>Логин</span>
             <input
@@ -96,7 +99,8 @@ const SignUpModal = ({ onClose }) => {
           </button>
           </label>
 
-          <button className="login-btn" type="submit" onClick={handleSubmit}>Зарегистрироваться</button>
+          <button className="login-btn" type="submit">Зарегистрироваться</button>
+        </form>
       </div>
     </div>
   );

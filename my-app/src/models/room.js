@@ -1,6 +1,6 @@
 
 
-class Reservation{
+class Room{
     constructor(id, title, description, type, cost, count, badForRoom, guestForRoom, params, bookedDates){
         this.id = id;
         this.title = title;
@@ -14,4 +14,4 @@ class Reservation{
         this.bookedDates = bookedDates;    }
 }
 
-export default Reservation;
+export default Room;

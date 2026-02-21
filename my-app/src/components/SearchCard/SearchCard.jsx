@@ -2,9 +2,9 @@ import { useState, useRef } from 'react';
 import "./SearchCard.css"; // Не забудь раскомментировать импорт
 
 const hotelImages = [
-    "https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&w=800&q=80",
-    "https://images.unsplash.com/photo-1566665797739-1674de7a421a?auto=format&fit=crop&w=800&q=80",
-    "https://images.unsplash.com/photo-1595576508898-0ad5c879a061?auto=format&fit=crop&w=800&q=80"
+    "../../__mocks__/photo1.jpg",
+    "../../__mocks__/photo2.jpg",
+    "../../__mocks__/photo3.jpg"
 ];
 
 const SearchCard = ({ room }) => {

@@ -24,7 +24,7 @@ const FilterCard = () => {
                     <input
                         type="number"
                         placeholder="От"
-                        value={filters.minPrice || ''}
+                        value={filters.minPrice}
                         onChange={(e) => updateFilters({ minPrice: e.target.value })}
                     />
                     <div className="dual-input__divider"></div>

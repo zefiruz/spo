@@ -5,7 +5,8 @@
     --border-color: #ccc;
 }
 
-html, body {
+html,
+body {
     display: flex;
     justify-content: center;
     align-items: flex-start;
@@ -22,6 +23,7 @@ html, body {
     user-select: none;
     cursor: default;
 }
+
 .main-container p {
     font-size: 1.7rem;
     margin-bottom: 40px;
@@ -29,7 +31,9 @@ html, body {
     cursor: default;
 }
 
-.content-wrapper { display: inline-block; }
+.content-wrapper {
+    display: inline-block;
+}
 
 /* 2. Search Bar Core */
 .search-bar {
@@ -57,7 +61,9 @@ html, body {
     cursor: pointer;
 }
 
-.search-item:not(:last-child) { border-right: 1px solid #eee; }
+.search-item:not(:last-child) {
+    border-right: 1px solid #eee;
+}
 
 /* 3. Inputs & Labels */
 .search-item label {
@@ -71,7 +77,8 @@ html, body {
     transition: 0.2s ease;
 }
 
-.search-item input, .custom-datepicker-input {
+.search-item input,
+.custom-datepicker-input {
     border: none !important;
     outline: none !important;
     font-size: 19px !important;
@@ -81,9 +88,13 @@ html, body {
     width: 100%;
     padding: 0;
     cursor: pointer !important;
+
+    caret-color: transparent !important;
+
+    user-select: none !important;
 }
 
-.search-item input::selection{
+.search-item input::selection {
     background: transparent;
 }
 
@@ -94,7 +105,11 @@ html, body {
 }
 
 /* 4. Layout Fractions */
-.first-quarter, .second-quarter { flex: 1; }
+.first-quarter,
+.second-quarter {
+    flex: 1;
+}
+
 .half-width {
     flex: 2;
     display: flex;
@@ -115,7 +130,8 @@ html, body {
 }
 
 .input-group input::selection {
-    background: transparent;    /* Делаем выделение невидимым */
+    background: transparent;
+    /* Делаем выделение невидимым */
 }
 
 /* 5. Button Styles */
@@ -143,13 +159,15 @@ html, body {
 }
 
 .search-icon-svg {
-    width: 26px;  /* Подбери размер под свою кнопку */
+    width: 26px;
+    /* Подбери размер под свою кнопку */
     height: 26px;
     /* Если иконка внутри файла имеет stroke="currentColor" или fill="currentColor" */
     /* то строчка ниже будет работать: */
     color: white;
 
-    pointer-events: none; /* Чтобы клик проходил сквозь иконку на кнопку */
+    pointer-events: none;
+    /* Чтобы клик проходил сквозь иконку на кнопку */
 }
 
 /* 6. Datepicker Override */
@@ -157,18 +175,23 @@ html, body {
     font-family: inherit !important;
     border-radius: 20px !important;
     border: none !important;
-    box-shadow: 0 15px 40px rgba(0,0,0,0.15) !important;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15) !important;
     padding: 10px !important;
 }
 
-.react-datepicker__header { background: white !important; border: none !important; }
+.react-datepicker__header {
+    background: white !important;
+    border: none !important;
+}
 
 .react-datepicker__current-month {
     font-size: 1rem !important;
     margin-bottom: 15px !important;
 }
 
-.react-datepicker__day-name { color: #bbb !important; }
+.react-datepicker__day-name {
+    color: #bbb !important;
+}
 
 .react-datepicker__day--selected {
     background-color: var(--primary-blue) !important;
@@ -200,9 +223,11 @@ html, body {
 
 .guests-modal {
     position: absolute;
-    top: 100%; /* Появляется сразу под блоком */
+    top: 100%;
+    /* Появляется сразу под блоком */
     left: 0;
-    margin-top: 15px; /* Тот же отступ, что мы делали для календаря */
+    margin-top: 15px;
+    /* Тот же отступ, что мы делали для календаря */
     width: 280px;
     background: white;
     border-radius: 20px;
@@ -243,7 +268,8 @@ html, body {
 }
 
 /* Отключаем выделение текста на кнопках счетчика */
-.counter span, .counter button {
+.counter span,
+.counter button {
     user-select: none;
 }
 
@@ -252,7 +278,7 @@ html, body {
     flex-direction: column;
 }
 
-.guest-info span{
+.guest-info span {
     color: #000000 !important;
 }
 
@@ -264,7 +290,8 @@ html, body {
 .counter {
     display: flex;
     align-items: center;
-    gap: 10px; /* Немного уменьшим зазор, так как элементов стало больше */
+    gap: 10px;
+    /* Немного уменьшим зазор, так как элементов стало больше */
 }
 
 .count-number {
@@ -275,6 +302,6 @@ html, body {
 }
 
 /* При наведении на кнопки можно подсвечивать соответствующие ярлыки (опционально) */
-.counter button:hover ~ .counter-label {
+.counter button:hover~.counter-label {
     color: var(--primary-blue);
 }

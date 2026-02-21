@@ -3,9 +3,14 @@
     const FiltersContext = createContext();
 
     export const FiltersProvider = ({ children }) => {
+
+        const today = new Date();
+        const nextWeek = new Date();
+        nextWeek.setDate(today.getDate() + 7);
+
         const [filters, setFilters] = useState({
-            startDate: null,
-            endDate: null,
+            startDate: today,
+            endDate: nextWeek,
             guests: 1,
             minPrice: 0,
             maxPrice: 50000,

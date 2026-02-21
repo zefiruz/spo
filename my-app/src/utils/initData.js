@@ -1,4 +1,4 @@
-import Reservation from '../models/reservation';
+import Reservation from '../models/room';
 
 const initialRooms = [
     new Reservation(
