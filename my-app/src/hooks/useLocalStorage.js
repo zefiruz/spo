@@ -1,17 +1,29 @@
-import { useState, useEffect } from "react";
+import { useState, useCallback } from "react";
 
 function useLocalStorage(key, initialValue) {
-    const [value, setValue] = useState(() => {
-        const jsonValue = localStorage.getItem(key);
-        if (jsonValue != null) return JSON.parse(jsonValue);
-        return initialValue;
+    const [storedValue, setStoredValue] = useState(() => {
+        try {
+            const item = window.localStorage.getItem(key);
+            return item ? JSON.parse(item) : initialValue;
+        } catch (error) {
+            console.error(`Ошибка при чтении ключа "${key}" из localStorage:`, error);
+            return initialValue;
+        }
     });
 
-    useEffect(() => {
-        localStorage.setItem(key, JSON.stringify(value));
-    }, [key, value]);
+    const setValue = useCallback((value) => {
+        try {
+            const valueToStore = value instanceof Function ? value(storedValue) : value;
 
-    return [value, setValue];
+            setStoredValue(valueToStore);
+
+            window.localStorage.setItem(key, JSON.stringify(valueToStore));
+        } catch (error) {
+            console.error(`Ошибка при записи ключа "${key}" в localStorage:`, error);
+        }
+    }, [key, storedValue]);
+
+    return [storedValue, setValue];
 }
 
 export default useLocalStorage;
