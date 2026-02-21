@@ -7,7 +7,7 @@ import Header from './components/Header/Header'
 import LoginModal from './components/Modals/LoginModal'
 import SignupModal from './components/Modals/SignUpModal'
 import MainPage from './pages/MainPage/MainPage'
-import SearchPage from './pages/SearchPage'
+import SearchPage from './pages/SearchPage/SearchPage'
 import BookingPage from './pages/BookingPage'
 import ProfilePage from './pages/ProfilePage'
 

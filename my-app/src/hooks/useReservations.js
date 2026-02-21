@@ -1,7 +1,9 @@
 import { useState, useEffect } from 'react';
+import { useFilters } from '../context/FiltersContext';
 
 const useRooms = () => {
     const [rooms, setRooms] = useState([]);
+    const {filters} = useFilters();
 
     useEffect(() => {
         const data = localStorage.getItem('hotels_data');
@@ -10,32 +12,18 @@ const useRooms = () => {
         }
     }, []);
 
-    /**
-     * @param {Object} filters - Объект с фильтрами
-     * {
-     * startDate: 'YYYY-MM-DD',
-     * endDate: 'YYYY-MM-DD',
-     * minPrice: number,
-     * maxPrice: number,
-     * type: string,
-     * guests: number
-     * }
-     */
-    const getFilteredRooms = (filters = {}) => {
+
+    const getFilteredRooms = () => {
         return rooms.filter(room => {
-            // 1. Фильтр по цене
             if (filters.minPrice && room.cost < filters.minPrice) return false;
             if (filters.maxPrice && room.cost > filters.maxPrice) return false;
 
-            // 2. Фильтр по гостям
             if (filters.guests && room.guestForRoom < filters.guests) return false;
 
-            // 3. Фильтр по ПАРАМЕТРАМ (params)
-            // filters.params — это массив строк, например ["wifi", "minibar"]
-            if (filters.params && filters.params.length > 0) {
-                const roomParamsValues = Object.values(room.params); // получаем ["codei", "wifi"...]
 
-                // Проверяем, что КАЖДАЯ строка из фильтра есть в параметрах комнаты
+            if (filters.params && filters.params.length > 0) {
+                const roomParamsValues = Object.values(room.params);
+
                 const hasAllParams = filters.params.every(param =>
                     roomParamsValues.includes(param)
                 );
@@ -43,7 +31,6 @@ const useRooms = () => {
                 if (!hasAllParams) return false;
             }
 
-            // 4. Фильтр по датам
             if (filters.startDate && filters.endDate) {
                 const reqStart = new Date(filters.startDate);
                 const reqEnd = new Date(filters.endDate);

@@ -1,10 +1,10 @@
-// import "./SeachCard.css";
-import { useState, useRef } from 'react'
+import { useState, useRef } from 'react';
+import "./SearchCard.css"; // Не забудь раскомментировать импорт
 
 const hotelImages = [
-    "./testPhotos/photo1.jpg",
-    "./testPhotos/photo2.jpg",
-    "./testPhotos/photo3.jpg"
+    "https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&w=800&q=80",
+    "https://images.unsplash.com/photo-1566665797739-1674de7a421a?auto=format&fit=crop&w=800&q=80",
+    "https://images.unsplash.com/photo-1595576508898-0ad5c879a061?auto=format&fit=crop&w=800&q=80"
 ];
 
 const SearchCard = ({ room }) => {
@@ -13,11 +13,10 @@ const SearchCard = ({ room }) => {
 
     const startSlide = () => {
         timerRef.current = setInterval(() => {
-            setCurrentIndex((prevIndex) =>
-                prevIndex === hotelImages.length - 1 ? 0 : prevIndex + 1
-            );
-        }, 1500);
+            setCurrentIndex((prev) => (prev === hotelImages.length - 1 ? 0 : prev + 1));
+        }, 1200);
     };
+
     const stopSlide = () => {
         if (timerRef.current) {
             clearInterval(timerRef.current);
@@ -27,26 +26,52 @@ const SearchCard = ({ room }) => {
     };
 
     return (
-        <div className="card__container">
-            <div className="card__image"
-                onMouseEnter={() => startSlide()}
-                onMouseLeave={() => stopSlide()}
-            >
-                <img src={hotelImages[currentIndex]} alt="Room img" />
+        <div className="hotel-card" onMouseEnter={startSlide} onMouseLeave={stopSlide}>
+            <div className="hotel-card__image-container">
+                <img
+                    src={hotelImages[currentIndex]}
+                    alt={room.title}
+                    className="hotel-card__image"
+                />
+                <div className="hotel-card__type-badge">{room.type}</div>
+
+                {/* Индикаторы слайдов (точки) */}
+                <div className="hotel-card__dots">
+                    {hotelImages.map((_, i) => (
+                        <span key={i} className={`dot ${i === currentIndex ? 'active' : ''}`} />
+                    ))}
+                </div>
             </div>
-            <h3>{room.title}</h3>
-            <div>{room.description}</div>
-            <div>{room.type}</div>
-            <div>{room.cost}</div>
-            <div>{room.count}</div>
-            <div>{room.badForRoom}</div>
-            <div>{room.guestForRoom}</div>
-            <ul>
-            </ul>
+
+            <div className="hotel-card__content">
+                <div className="hotel-card__header">
+                    <h3 className="hotel-card__title">{room.title}</h3>
+                    <div className="hotel-card__rating">★ 4.9</div>
+                </div>
+
+                <p className="hotel-card__description">{room.description}</p>
+
+                <div className="hotel-card__details">
+                    <span>👥 {room.guestForRoom} гостей</span>
+                    <span>🛏️ {room.badForRoom} кровати</span>
+                </div>
+
+                <div className="hotel-card__params">
+                    {Object.values(room.params || {}).map((param, index) => (
+                        <span key={index} className="param-tag">{param}</span>
+                    ))}
+                </div>
+
+                <div className="hotel-card__footer">
+                    <div className="hotel-card__price">
+                        <span className="price-value">{room.cost.toLocaleString()} ₽</span>
+                        <span className="price-period"> / ночь</span>
+                    </div>
+                    <button className="hotel-card__book-btn">Выбрать</button>
+                </div>
+            </div>
         </div>
-    )
-}
-
-
+    );
+};
 
 export default SearchCard;

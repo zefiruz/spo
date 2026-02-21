@@ -2,6 +2,8 @@ import { useState, useEffect } from 'react'
 import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
 import './MainPage.css';
+import { useFilters } from '../../context/FiltersContext' // Убедись, что название файла совпадает
+import { useNavigate } from 'react-router-dom';
 import searchIcon from "../../lib/icons/search.svg";
 
 import { registerLocale } from "react-datepicker";
@@ -9,18 +11,33 @@ import { ru } from 'date-fns/locale/ru';
 registerLocale('ru', ru);
 
 const MainPage = () => {
-    const [checkInDate, setCheckInDate] = useState(null);
-    const [checkOutDate, setCheckOutDate] = useState(null);
+    const navigate = useNavigate();
+    // Извлекаем нужные функции из контекста.
+    // Исправлена опечатка: было setFileres, стало updateFilters (как в твоем контексте)
+    const { filters, updateFilters } = useFilters();
 
-    const [isGuestsOpen, setIsGuestsOpen] = useState(false);
-    const [guests, setGuests] = useState({ adults: 2, children: 0 });
-    const toggleGuests = () => setIsGuestsOpen(!isGuestsOpen);
+    // Локальные состояния для дат (чтобы инпуты были "быстрыми")
+    const [checkInDate, setCheckInDate] = useState(filters.startDate);
+    const [checkOutDate, setCheckOutDate] = useState(filters.endDate);
 
     const [activeModal, setActiveModal] = useState(null);
+    const [guests, setGuests] = useState({ adults: 2, children: 0 });
 
-    // Универсальная функция переключения
     const toggleModal = (modalName) => {
         setActiveModal(prev => prev === modalName ? null : modalName);
+    };
+
+    // Функция для финального поиска
+    const handleSearch = () => {
+        // 1. Сохраняем всё в глобальный контекст перед уходом
+        updateFilters({
+            startDate: checkInDate,
+            endDate: checkOutDate,
+            guests: guests.adults + guests.children // или храни раздельно, если контекст позволяет
+        });
+
+        // 2. Уходим на страницу бронирования
+        navigate('/booking');
     };
 
     useEffect(() => {
@@ -44,25 +61,21 @@ const MainPage = () => {
                         <label>Заезд</label>
                         <DatePicker
                             selected={checkInDate}
-                            onChange={(date) =>
-                                {setCheckInDate(date);
-                                setActiveModal('checkOut');}}
+                            onChange={(date) => {
+                                setCheckInDate(date);
+                                setActiveModal('checkOut');
+                                // Можно обновлять контекст сразу или только по кнопке
+                                updateFilters({ startDate: date });
+                            }}
                             open={activeModal === 'checkIn'}
                             onInputClick={() => toggleModal('checkIn')}
-                            popperPlacement="bottom-start" // Фиксирует появление снизу
-                            popperModifiers={[
-                                {
-                                    name: "offset",
-                                    options: {
-                                        offset: [0, 25],
-                                    },
-                                },
-                            ]}
+                            popperPlacement="bottom-start"
                             selectsStart
                             startDate={checkInDate}
                             endDate={checkOutDate}
-                            minDate={new Date()} // Нельзя выбрать прошлое
-                            locale="ru" dateFormat="dd MMMM yyyy"
+                            minDate={new Date()}
+                            locale="ru"
+                            dateFormat="dd MMMM yyyy"
                             placeholderText="Выберите дату"
                             className="custom-datepicker-input"
                         />
@@ -75,22 +88,15 @@ const MainPage = () => {
                             onChange={(date) => {
                                 setCheckOutDate(date);
                                 setActiveModal(null);
+                                updateFilters({ endDate: date });
                             }}
-                            open={activeModal === 'checkOut'} // Управление открытием
+                            open={activeModal === 'checkOut'}
                             onInputClick={() => toggleModal('checkOut')}
-                            popperPlacement="bottom-start" // Фиксирует появление снизу
-                            popperModifiers={[
-                                {
-                                    name: "offset",
-                                    options: {
-                                        offset: [0, 25],
-                                    },
-                                },
-                            ]}
+                            popperPlacement="bottom-start"
                             selectsEnd
                             startDate={checkInDate}
                             endDate={checkOutDate}
-                            minDate={checkInDate || new Date()} // Нельзя выехать раньше, чем заехали
+                            minDate={checkInDate || new Date()}
                             locale="ru"
                             dateFormat="dd MMMM yyyy"
                             placeholderText="Выберите дату"
@@ -107,7 +113,8 @@ const MainPage = () => {
                                 value={`${guests.adults} взрослых, ${guests.children} детей`}
                             />
                         </div>
-                        <button className="search-btn-circle">
+                        {/* Добавлен onClick для роутинга */}
+                        <button className="search-btn-circle" onClick={handleSearch}>
                             <img src={searchIcon} alt="Search" className="search-icon-svg" />
                         </button>
 

@@ -1,0 +1,101 @@
+@import url('https://fonts.googleapis.com/css2?family=Inria+Sans:wght@400;700&display=swap');
+
+.filter-card {
+    font-family: 'Inria Sans', sans-serif;
+    background: #ffffff;
+    padding: 24px;
+    border-radius: 16px;
+    border: 1px solid #e0e0e0;
+    width: 100%;
+    max-width: 320px;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    /* Убеждаемся, что всё внутри выровнено по левому краю */
+    align-items: flex-start;
+}
+
+.filter-card__title {
+    font-size: 26px;
+    font-weight: 700;
+    margin-bottom: 5px;
+    color: #000;
+    align-self: flex-start;
+}
+
+.filter-section {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: 100%; /* Растягиваем секцию на всю ширину сайдбара */
+}
+
+.filter-section__label {
+    font-size: 18px;
+    font-weight: 700; /* Жирный шрифт для всех подзаголовков */
+    color: #000;
+    text-align: left;
+}
+
+/* Контейнер для Гостей и Кроватей */
+.input-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between; /* Текст слева, инпут справа */
+    align-items: center;
+    width: 100%;
+}
+
+.single-input {
+    width: 60px;
+    border: 1px solid #dcdcdc;
+    border-radius: 8px;
+    padding: 8px;
+    font-size: 16px;
+    font-family: 'Inria Sans', sans-serif;
+    outline: none;
+    text-align: center;
+}
+
+.dual-input {
+    display: flex;
+    align-items: center;
+    border: 1px solid #dcdcdc;
+    border-radius: 10px;
+    width: 100%; /* Растягиваем на всю ширину */
+}
+
+.checkbox-group, .radio-group {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    align-items: flex-start; /* Чекбоксы строго по левому краю */
+}
+
+.checkbox-container, .radio-container {
+    display: flex;
+    flex-direction: row-reverse; /* Сначала текст, потом инпут? Нет, лучше оставить инпут слева */
+    justify-content: flex-end;
+    align-items: center;
+    gap: 12px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+/* Если хочешь, чтобы чекбокс тоже был СПРАВА, используй это: */
+.checkbox-container {
+    width: 100%;
+    justify-content: space-between;
+    flex-direction: row; /* Текст слева, чекбокс справа */
+}
+
+.filter-card__reset {
+    background: none;
+    border: none;
+    text-decoration: underline;
+    font-family: 'Inria Sans', sans-serif;
+    font-size: 14px;
+    color: #717171;
+    cursor: pointer;
+    padding: 0;
+}
