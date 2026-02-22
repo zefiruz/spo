@@ -7,13 +7,15 @@ import ProfileIcon from '../../lib/icons/account_circle.svg';
 const ProfilePage = () => {
     const { user, logout } = useAuth();
     const navigate = useNavigate();
+    const [showToast, setShowToast] = useState(false);
 
     // 1. Создаем состояние для полей формы
     const [formData, setFormData] = useState({
         firstName: '',
         lastName: '',
         middleName: '',
-        phone: ''
+        phone: '',
+        email: ''
     });
 
     // 2. Загружаем данные из localStorage при загрузке страницы
@@ -22,6 +24,11 @@ const ProfilePage = () => {
             const savedData = localStorage.getItem(`profile_data_${user.login}`);
             if (savedData) {
                 setFormData(JSON.parse(savedData));
+            } else{
+                setFormData(prev => ({
+                    ...prev,
+                    email: user.email || user.login || ''
+            }   ));
             }
         } else {
             navigate('/');
@@ -37,10 +44,17 @@ const ProfilePage = () => {
         }));
     };
 
-    // 4. Функция сохранения
     const handleSave = () => {
+        // Сохраняем в память
         localStorage.setItem(`profile_data_${user.login}`, JSON.stringify(formData));
-        alert('Данные успешно сохранены!');
+        
+        // Показываем уведомление
+        setShowToast(true);
+        
+        // Прячем через 3 секунды
+        setTimeout(() => {
+            setShowToast(false);
+        }, 3000);
     };
 
     if (!user) return null;
@@ -105,13 +119,18 @@ const ProfilePage = () => {
                         </div>
                         <div className="info-item full-width">
                             <label>Email</label>
-                            <input type="email" value={user.email || user.login} readOnly className="readonly-input" />
-                            <small>Email используется для входа и не может быть изменен</small>
+                            <input 
+                            type="email"
+                            name='email'
+                            value={formData.email || user.login} 
+                            onChange={handleChange}
+                            />
                         </div>
                     </div>
                     <button className="save-profile-btn" onClick={handleSave}>
                         Сохранить изменения
                     </button>
+                    {showToast && <div className="toast-success">Данные успешно сохранены!</div>}
 
                     {/* Секция статистики */}
                     <div className="stats-section">
@@ -138,6 +157,7 @@ const ProfilePage = () => {
                 </div>
             </div>
         </div>
+        
     );
 };
 

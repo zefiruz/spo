@@ -1,0 +1,76 @@
+.bookings-container {
+    max-width: 1000px;
+    margin: 100px auto; /* С учетом фиксированного хедера */
+    padding: 20px;
+    font-family: sans-serif;
+    color: #333;
+}
+
+.bookings-title {
+    font-family: "Lilita One", sans-serif;
+    font-size: 32px;
+    color: #0088FF;
+    margin-bottom: 30px;
+}
+
+.bookings-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.booking-card {
+    background: #fff;
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-left: 5px solid #0088FF;
+    transition: transform 0.2s ease;
+}
+
+.booking-card:hover {
+    transform: translateX(10px);
+}
+
+.booking-info h3 {
+    margin: 0 0 10px 0;
+    font-size: 22px;
+}
+
+.booking-details {
+    display: flex;
+    gap: 20px;
+    font-size: 14px;
+    color: #666;
+}
+
+.status-badge {
+    margin-top: 15px;
+    display: inline-block;
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.status-badge.pending {
+    background: #fff3cd;
+    color: #856404;
+}
+
+.status-badge.confirmed {
+    background: #d4edda;
+    color: #155724;
+}
+
+.no-bookings {
+    text-align: center;
+    padding: 50px;
+    background: #f9f9f9;
+    border-radius: 15px;
+    color: #999;
+}

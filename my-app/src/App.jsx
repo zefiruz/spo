@@ -8,7 +8,7 @@ import LoginModal from './components/Modals/LoginModal'
 import SignupModal from './components/Modals/SignUpModal'
 import MainPage from './pages/MainPage/MainPage'
 import SearchPage from './pages/SearchPage/SearchPage'
-import BookingPage from './pages/BookingPage'
+import BookingPage from './pages/BookingPage/BookingPage'
 import ProfilePage from './pages/ProfilePage/ProfilePage'
 
 

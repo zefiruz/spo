@@ -5,6 +5,7 @@ import BadIcon from '../../lib/icons/bad.svg?react'
 import ProfileIcon from '../../lib/icons/account_circle.svg?react'
 const Header = ({ OnOpenLogin}) => {
     const { user, logout } = useAuth();
+    
     return (
         <div className="Header__container">
             <Link to="/">
