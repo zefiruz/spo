@@ -1,4 +1,4 @@
-import Reservation from '../models/room';
+import Reservation from '../models/Room';
 
 const initialRooms = [
     new Reservation(
@@ -7,77 +7,34 @@ const initialRooms = [
         "Просторный номер с панорамными окнами",
         "Deluxe",
         15000,
-        5, 2, 2,
+        2, 2,
                 {
             1: "codei"
-        },
-        [
-        {
-            start: "2026-06-01",
-            end: "2026-06-10",
-            userId: "user_123",
-            status: "confirmed"
-        },
-        {
-            start: "2026-07-15",
-            end: "2026-07-20",
-            userId: "user_456",
-            status: "pending"
         }
-    ]
     ),
     new Reservation(
         2,
         "Стандартный двухместный",
         "Уютный номер для двоих",
         "Standard",
-        5000,
-        10, 1, 2,
+        5000, 1, 2,
         {
             1: "codei"
-        },
-        [
-        {
-            start: "2026-06-01",
-            end: "2026-06-10",
-            userId: "user_123",
-            status: "confirmed"
-        },
-        {
-            start: "2026-07-15",
-            end: "2026-07-20",
-            userId: "user_456",
-            status: "pending"
         }
-    ]
     ),
     new Reservation(
         3,
         "Семейный номер",
         "Две комнаты и детская кровать",
         "Family",
-        8000,
-        3, 3, 4,{
+        8000, 3, 4,{
             1: "codei",
             2: "minibar",
             3: "wifi"
         },
-        [
-        {
-            start: "2026-06-01",
-            end: "2026-06-10",
-            userId: "user_123",
-            status: "confirmed"
-        },
-        {
-            start: "2026-07-15",
-            end: "2026-07-20",
-            userId: "user_456",
-            status: "pending"
-        }
-    ]
     )
 ];
+
 
 
 export const initLocalStorage = () => {

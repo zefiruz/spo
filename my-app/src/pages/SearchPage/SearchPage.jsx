@@ -1,13 +1,13 @@
 import { useState } from 'react';
 import SearchCard from "../../components/SearchCard/SearchCard";
-import useRooms from '../../hooks/useReservations';
+import useReservations from '../../hooks/useReservations';
 import { useFilters } from '../../context/FiltersContext';
 import FilterCard from "../../components/FiltersCard/FilterCard";
 import './SearchPage.css';
 
 const SearchPage = () => {
     const { filters, updateFilters } = useFilters();
-    const { getFilteredRooms } = useRooms();
+    const { getFilteredRooms } = useReservations();
     const [searchQuery, setSearchQuery] = useState("");
 
     // Сначала фильтруем по параметрам из FilterCard

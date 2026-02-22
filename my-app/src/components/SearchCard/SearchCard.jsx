@@ -1,5 +1,7 @@
 import { useState, useRef } from 'react';
 import "./SearchCard.css"; // Не забудь раскомментировать импорт
+import { useBooking } from '../../context/BookingContex';
+import { useFilters } from '../../context/FiltersContext';
 
 const hotelImages = [
     "../../__mocks__/photo1.jpg",
@@ -9,6 +11,8 @@ const hotelImages = [
 
 const SearchCard = ({ room }) => {
     const [currentIndex, setCurrentIndex] = useState(0);
+    const {createBooking} = useBooking();
+    const {filters} = useFilters();
     const timerRef = useRef(null);
 
     const startSlide = () => {
@@ -24,9 +28,15 @@ const SearchCard = ({ room }) => {
         }
         setCurrentIndex(0);
     };
+    const handleBooking = () =>{
+        createBooking(room.id, filters.startDate, filters.endDate);
+    }
 
     return (
-        <div className="hotel-card" onMouseEnter={startSlide} onMouseLeave={stopSlide}>
+        <div className="hotel-card"
+         onMouseEnter={startSlide}
+         onMouseLeave={stopSlide}
+         onClick={handleBooking}>
             <div className="hotel-card__image-container">
                 <img
                     src={hotelImages[currentIndex]}

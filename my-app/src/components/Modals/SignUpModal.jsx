@@ -5,9 +5,8 @@ import { useState } from 'react';
 
 
 const SignUpModal = ({ onClose }) => {
-  const [users, setUsers] = useLocalStorage("users", []);
   const [inputLogin, setinputLogin] = useState();
-  const {login} = useAuth();
+  const {login, users, setUsers} = useAuth();
   const [password, setPassword] = useState();
   const [confirmPassword, setConfirmPassword] = useState();
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);

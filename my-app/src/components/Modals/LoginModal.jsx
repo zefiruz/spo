@@ -1,12 +1,10 @@
-import useLocalStorage from '../../hooks/useLocalStorage';
 import { useAuth } from '../../context/AuthContext'
 import './Modal.css'
 import { useState } from 'react';
 
 
 const LoginModal = ({ onClose, OnOpenSignUp }) => {
-  const [users, setUsers] = useLocalStorage("users", []);
-  const { login } = useAuth();
+  const {users, login } = useAuth();
   const [inputLogin, setInputLogin] = useState();
   const [password, setPassword] = useState();
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
