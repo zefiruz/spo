@@ -3,99 +3,168 @@
 .filter-card {
     font-family: 'Inria Sans', sans-serif;
     background: #ffffff;
-    padding: 24px;
-    border-radius: 16px;
-    border: 1px solid #e0e0e0;
+    color: #1a1a1a !important;
+    padding: 30px;
+    border-radius: 24px;
+    border: 1px solid #f0f0f0;
     width: 100%;
     max-width: 320px;
     display: flex;
     flex-direction: column;
-    gap: 25px;
-    /* Убеждаемся, что всё внутри выровнено по левому краю */
-    align-items: flex-start;
+    gap: 28px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.04);
 }
 
 .filter-card__title {
-    font-size: 26px;
+    font-size: 24px;
     font-weight: 700;
-    margin-bottom: 5px;
-    color: #000;
-    align-self: flex-start;
+    margin: 0;
+    color: #1a1a1a;
 }
 
 .filter-section {
     display: flex;
     flex-direction: column;
     gap: 12px;
-    width: 100%; /* Растягиваем секцию на всю ширину сайдбара */
 }
 
 .filter-section__label {
-    font-size: 18px;
-    font-weight: 700; /* Жирный шрифт для всех подзаголовков */
-    color: #000;
-    text-align: left;
+    font-size: 14px;
+    font-weight: 700;
+    color: #1a1a1a !important;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
 }
 
-/* Контейнер для Гостей и Кроватей */
-.input-row {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between; /* Текст слева, инпут справа */
-    align-items: center;
-    width: 100%;
-}
-
-.single-input {
-    width: 60px;
-    border: 1px solid #dcdcdc;
-    border-radius: 8px;
-    padding: 8px;
-    font-size: 16px;
-    font-family: 'Inria Sans', sans-serif;
-    outline: none;
-    text-align: center;
-}
-
+/* Красивый двойной ввод */
 .dual-input {
     display: flex;
     align-items: center;
-    border: 1px solid #dcdcdc;
-    border-radius: 10px;
-    width: 100%; /* Растягиваем на всю ширину */
+    border: 1.5px solid #eee;
+    border-radius: 12px;
+    background: #fcfcfc;
+    overflow: hidden;
+    transition: border-color 0.2s;
 }
 
-.checkbox-group, .radio-group {
+.dual-input:focus-within {
+    border-color: #0088FF;
+}
+
+.dual-input input {
+    width: 50%;
+    border: none !important;
+    padding: 12px;
+    font-size: 15px;
+    background: transparent;
+    outline: none;
+    text-align: center;
+    font-family: inherit;
+}
+
+.dual-input__divider {
+    width: 1px;
+    height: 25px;
+    background: #eee;
+}
+
+/* Сетка для Гостей/Кроватей */
+.filter-grid {
     display: flex;
     flex-direction: column;
-    gap: 12px;
-    align-items: flex-start; /* Чекбоксы строго по левому краю */
+    gap: 15px;
 }
 
-.checkbox-container, .radio-container {
+.input-row {
     display: flex;
-    flex-direction: row-reverse; /* Сначала текст, потом инпут? Нет, лучше оставить инпут слева */
-    justify-content: flex-end;
+    justify-content: space-between;
     align-items: center;
-    gap: 12px;
+}
+
+.single-input {
+    width: 55px;
+    border: 1.5px solid #eee;
+    border-radius: 10px;
+    padding: 8px;
+    font-size: 16px;
+    font-weight: 700;
+    text-align: center;
+    outline: none;
+    transition: 0.2s;
+}
+
+.single-input:focus {
+    border-color: #0088FF;
+}
+
+/* Кастомные чекбоксы */
+.checkbox-group {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.checkbox-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     cursor: pointer;
     font-size: 16px;
+    color: #444;
+    position: relative;
+    padding: 4px 0;
 }
 
-/* Если хочешь, чтобы чекбокс тоже был СПРАВА, используй это: */
-.checkbox-container {
-    width: 100%;
-    justify-content: space-between;
-    flex-direction: row; /* Текст слева, чекбокс справа */
+/* Прячем стандартный чекбокс */
+.checkbox-container input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.custom-checkbox {
+    width: 20px;
+    height: 20px;
+    border: 2px solid #eee;
+    border-radius: 6px;
+    transition: 0.2s;
+    background: white;
+}
+
+.checkbox-container:hover .custom-checkbox {
+    border-color: #0088FF;
+}
+
+.checkbox-container input:checked ~ .custom-checkbox {
+    background-color: #0088FF;
+    border-color: #0088FF;
+}
+
+/* Галочка внутри чекбокса */
+.custom-checkbox:after {
+    content: "";
+    position: absolute;
+    display: none;
+    left: 80%; /* Центрируем относительно правой части */
+    transform: translateX(-50%);
+}
+
+.checkbox-container input:checked ~ .custom-checkbox:after {
+    display: block;
 }
 
 .filter-card__reset {
+    margin-top: 10px;
     background: none;
     border: none;
     text-decoration: underline;
-    font-family: 'Inria Sans', sans-serif;
     font-size: 14px;
-    color: #717171;
+    color: #aaa;
     cursor: pointer;
-    padding: 0;
+    align-self: flex-start;
+    transition: color 0.2s;
+}
+
+.filter-card__reset:hover {
+    color: #ff4d4f;
 }

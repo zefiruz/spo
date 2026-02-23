@@ -1,13 +1,14 @@
 import { useState } from 'react';
 import SearchCard from "../../components/SearchCard/SearchCard";
-import useRooms from '../../hooks/useReservations';
+import useReservations from '../../hooks/useReservations';
 import { useFilters } from '../../context/FiltersContext';
 import FilterCard from "../../components/FiltersCard/FilterCard";
+import SearchIcon from '../../lib/icons/search.svg?react';
 import './SearchPage.css';
 
 const SearchPage = () => {
     const { filters, updateFilters } = useFilters();
-    const { getFilteredRooms } = useRooms();
+    const { getFilteredRooms } = useReservations();
     const [searchQuery, setSearchQuery] = useState("");
 
     // Сначала фильтруем по параметрам из FilterCard
@@ -20,21 +21,26 @@ const SearchPage = () => {
 
     return (
         <div className="search-page-container">
-            {/* Сайдбар теперь просто обертка для FilterCard */}
             <aside className="filters-sidebar-wrapper">
                 <FilterCard />
             </aside>
 
             <main className="results-section">
-                {/* Новая строка поиска */}
                 <div className="search-query-container">
-                    <input
-                        type="text"
-                        placeholder="Поиск по названию отеля или номера..."
-                        value={searchQuery}
-                        onChange={(e) => setSearchQuery(e.target.value)}
-                        className="name-search-input"
-                    />
+                    <div className="search-bar">
+                        <div className="search-item">
+                            <label>Поиск</label>
+                            <input
+                                type="text"
+                                placeholder="Название отеля или номера..."
+                                value={searchQuery}
+                                onChange={(e) => setSearchQuery(e.target.value)}
+                            />
+                        </div>
+                        <button className="search-btn-circle">
+                            <SearchIcon width="20" height="20" />
+                        </button>
+                    </div>
                 </div>
 
                 <div className="results-header">

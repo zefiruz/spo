@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
 import './MainPage.css';
-import { useFilters } from '../../context/FiltersContext' // Убедись, что название файла совпадает
+import { useFilters } from '../../context/FiltersContext';
 import { useNavigate } from 'react-router-dom';
 import searchIcon from "../../lib/icons/search.svg";
 
@@ -49,7 +49,7 @@ const MainPage = () => {
     }, []);
 
     return (
-        <div className="main-container">
+        <div className="main-container centered-page">
             <div className="content-wrapper">
                 <h2>Забудь про обычные отели.</h2>
                 <p>SEA.hotel - уникальное пространство для тех, кто выбирает лучшее.</p>

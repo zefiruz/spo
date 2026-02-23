@@ -5,15 +5,28 @@
     --border-color: #ccc;
 }
 
-html,
-body {
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    min-height: 100vh;
+    display: block; 
     box-sizing: border-box;
-    text-align: center;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
 
+.centered-page {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+*, *:before, *:after {
+    box-sizing: inherit;
 }
 
 .main-container h2 {

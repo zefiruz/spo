@@ -1,14 +1,18 @@
 import { useState, useRef } from 'react';
 import "./SearchCard.css"; // Не забудь раскомментировать импорт
+import { useBooking } from '../../context/BookingContex';
+import { useFilters } from '../../context/FiltersContext';
 
 const hotelImages = [
-    "../../__mocks__/photo1.jpg",
-    "../../__mocks__/photo2.jpg",
-    "../../__mocks__/photo3.jpg"
+    new URL('../../__mocks__/photo1.jpg', import.meta.url).href,
+    new URL('../../__mocks__/photo2.jpg', import.meta.url).href,
+    new URL('../../__mocks__/photo3.jpg', import.meta.url).href,
 ];
 
 const SearchCard = ({ room }) => {
     const [currentIndex, setCurrentIndex] = useState(0);
+    const {createBooking} = useBooking();
+    const {filters} = useFilters();
     const timerRef = useRef(null);
 
     const startSlide = () => {
@@ -24,9 +28,15 @@ const SearchCard = ({ room }) => {
         }
         setCurrentIndex(0);
     };
+    const handleBooking = () =>{
+        createBooking(room.id, filters.startDate, filters.endDate);
+    }
 
     return (
-        <div className="hotel-card" onMouseEnter={startSlide} onMouseLeave={stopSlide}>
+        <div className="hotel-card"
+         onMouseEnter={startSlide}
+         onMouseLeave={stopSlide}
+         onClick={handleBooking}>
             <div className="hotel-card__image-container">
                 <img
                     src={hotelImages[currentIndex]}
@@ -35,7 +45,6 @@ const SearchCard = ({ room }) => {
                 />
                 <div className="hotel-card__type-badge">{room.type}</div>
 
-                {/* Индикаторы слайдов (точки) */}
                 <div className="hotel-card__dots">
                     {hotelImages.map((_, i) => (
                         <span key={i} className={`dot ${i === currentIndex ? 'active' : ''}`} />

@@ -13,18 +13,38 @@ const FilterCard = () => {
         updateFilters({ params: newParams });
     };
 
+    const handleReset = () => {
+        updateFilters({
+            minPrice: 0,
+            maxPrice: 50000,
+            guests: 1,
+            params: [],
+        });
+    };
+
+    const formatDate = (date) => {
+        if (!date) return '';
+        const d = new Date(date);
+        
+        const year = d.getFullYear();
+        
+        const month = String(d.getMonth() + 1).padStart(2, '0'); 
+        const day = String(d.getDate()).padStart(2, '0');
+        
+        return `${year}-${month}-${day}`; // Формат YYYY-MM-DD
+    };
+
     return (
         <aside className="filter-card">
             <h3 className="filter-card__title">Фильтры</h3>
 
-            {/* Цена за ночь (Разделенный прямоугольник) */}
             <div className="filter-section">
                 <label className="filter-section__label">Цена за ночь</label>
                 <div className="dual-input">
                     <input
                         type="number"
                         placeholder="От"
-                        value={filters.minPrice}
+                        value={filters.minPrice || ''}
                         onChange={(e) => updateFilters({ minPrice: e.target.value })}
                     />
                     <div className="dual-input__divider"></div>
@@ -37,86 +57,63 @@ const FilterCard = () => {
                 </div>
             </div>
 
-            {/* Даты пребывания (Аналогичный прямоугольник) */}
             <div className="filter-section">
                 <label className="filter-section__label">Даты пребывания</label>
                 <div className="dual-input">
-                    <input type="text" placeholder="Заезд" onFocus={(e) => (e.target.type = "date")} />
+                    <input 
+                        type="date" 
+                        value={formatDate(filters.startDate)} 
+                        onChange={(e) => updateFilters({ startDate: new Date(e.target.value) })}
+                    />
                     <div className="dual-input__divider"></div>
-                    <input type="text" placeholder="Выезд" onFocus={(e) => (e.target.type = "date")} />
+                    <input 
+                        type="date" 
+                        value={formatDate(filters.endDate)} 
+                        onChange={(e) => updateFilters({ endDate: new Date(e.target.value) })}
+                    />
                 </div>
             </div>
 
-            {/* Числовые параметры (Гости и Кровати) */}
             <div className="filter-grid">
-                <div className="filter-section">
-                    <div className="input-row">
-                        <label className="filter-section__label">Гости</label>
-                        <input
-                            className="single-input"
-                            type="number"
-                            min="1"
-                            value={filters.guests}
-                            onChange={(e) => updateFilters({ guests: e.target.value })}
-                        />
-                    </div>
+                <div className="input-row">
+                    <label className="filter-section__label">Гости</label>
+                    <input
+                        className="single-input"
+                        type="number"
+                        min="1"
+                        value={filters.guests}
+                        onChange={(e) => updateFilters({ guests: e.target.value })}
+                    />
                 </div>
-
-                <div className="filter-section">
-                    <div className="input-row">
-                        <label className="filter-section__label">Кровати</label>
-                        <input
-                            className="single-input"
-                            type="number"
-                            min="0"
-                            placeholder="0"
-                        />
-                    </div>
+                <div className="input-row">
+                    <label className="filter-section__label">Кровати</label>
+                    <input
+                        className="single-input"
+                        type="number"
+                        min="0"
+                        placeholder="0"
+                    />
                 </div>
             </div>
 
-            {/* Количество комнат (Чекбоксы) */}
-            <div className="filter-section">
-                <label className="filter-section__label">Количество комнат</label>
-                <div className="checkbox-group">
-                    {[1, 2, 3, '4+'].map(num => (
-                        <label key={num} className="checkbox-container">
-                            <input type="checkbox" />
-                            <span className="checkbox-label">{num} {num === 1 ? 'комната' : 'комнаты'}</span>
-                        </label>
-                    ))}
-                </div>
-            </div>
-
-            {/* В номере (Чекбоксы) */}
             <div className="filter-section">
                 <label className="filter-section__label">В номере</label>
                 <div className="checkbox-group">
                     {['Кондиционер', 'Wi-Fi', 'Минибар', 'Сейф'].map(item => (
                         <label key={item} className="checkbox-container">
-                            <input type="checkbox" onChange={() => handleParamChange(item.toLowerCase())} />
                             <span className="checkbox-label">{item}</span>
+                            <input 
+                                type="checkbox" 
+                                checked={filters.params?.includes(item.toLowerCase())}
+                                onChange={() => handleParamChange(item.toLowerCase())} 
+                            />
+                            <span className="custom-checkbox"></span>
                         </label>
                     ))}
                 </div>
             </div>
 
-            {/* Питание (Радиокнопки) */}
-            <div className="filter-section">
-                <label className="filter-section__label">Питание</label>
-                <div className="radio-group">
-                    <label className="radio-container">
-                        <input type="radio" name="food" value="included" />
-                        <span className="radio-label">Включено</span>
-                    </label>
-                    <label className="radio-container">
-                        <input type="radio" name="food" value="not-included" defaultChecked />
-                        <span className="radio-label">Не включено</span>
-                    </label>
-                </div>
-            </div>
-
-            <button className="filter-card__reset" onClick={() => window.location.reload()}>Сбросить всё</button>
+            <button className="filter-card__reset" onClick={handleReset}>Сбросить всё</button>
         </aside>
     );
 };

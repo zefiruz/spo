@@ -1,0 +1,66 @@
+.reservation-card__container {
+    background: #ffffff;
+    border: 1px solid #e0e0e0 !important; /* Убираем яркий #ccc */
+    border-radius: 12px;
+    margin: 15px 0 !important;
+    padding: 20px !important;
+    position: relative;
+    transition: all 0.2s ease-in-out;
+    font-family: 'Inter', sans-serif;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+}
+
+/* Эффект при наведении — карточка "окрашивается" в цвет опасности */
+.reservation-card__container:hover {
+    border-color: #ff385c !important;
+    background-color: #fff1f3;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(255, 56, 92, 0.1);
+}
+
+.res-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 14px;
+    color: #444;
+}
+
+.res-row strong {
+    color: #1a1a1a;
+    font-weight: 600;
+}
+
+.res-row span {
+    color: #666 !important; /* Гарантируем, что текст не будет белым */
+}
+
+/* Выделяем название комнаты */
+.title-row {
+    margin-top: 8px;
+    padding-top: 8px;
+    border-top: 1px dashed #eee;
+}
+
+.title-row span {
+    font-weight: 700;
+    color: #0088FF !important;
+}
+
+/* Подсказка, которая появляется при наведении */
+.cancel-hint {
+    font-size: 11px;
+    color: #ff385c;
+    text-align: center;
+    margin-top: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    opacity: 0;
+    transition: opacity 0.2s;
+}
+
+.reservation-card__container:hover .cancel-hint {
+    opacity: 1;
+}

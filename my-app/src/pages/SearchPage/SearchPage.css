@@ -1,78 +1,146 @@
+/* Используем переменные проекта */
+:root {
+    --primary-blue: #0088FF;
+    --hover-blue: #0076D6;
+}
+
 .search-page-container {
     display: grid;
     grid-template-columns: 300px 1fr; 
-    gap: 30px;
-    padding: 40px;
-    max-width: 1400px;
+    gap: 40px;
     margin: 0 auto;
     min-height: 100vh;
+    padding-inline: 100px;
+    align-items: start;
 }
 
-.filters-sidebar {
+/* Сайдбар */
+.search-page-container .filters-sidebar {
     background: white;
     padding: 25px;
-    border-radius: 16px;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.05);
-    height: sticky;
-    top: 20px;
+    border-radius: 20px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    position: sticky; 
+    top: 110px; 
+    z-index: 10;
 }
 
-.filters-sidebar h3 {
-    margin-bottom: 20px;
-    font-size: 1.4rem;
-    color: #333;
-}
-
-.filter-group {
-    margin-bottom: 30px;
-}
-
-.filter-group label {
-    display: block;
-    margin-bottom: 12px;
-    font-weight: 600;
-    color: #666;
-}
-
-.checkbox-list {
+/* Специфичные классы для поиска, чтобы не конфликтовать с главной */
+.search-page-container .search-query-container {
     display: flex;
-    flex-direction: column;
-    gap: 10px;
+    justify-content: flex-start; 
+    margin-bottom: 40px;
+    width: 100%;
 }
 
-.checkbox-item {
+.search-page-container .search-bar {
     display: flex;
     align-items: center;
-    gap: 10px;
-    cursor: pointer;
-    font-size: 0.95rem;
-}
-
-.results-header {
-    margin-bottom: 25px;
-}
-
-.rooms-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-    gap: 25px;
-}
-
-.no-results {
-    grid-column: 1 / -1;
-    text-align: center;
-    padding: 100px 0;
     background: white;
-    border-radius: 16px;
+    border-radius: 50px;
+    padding: 8px 10px 8px 30px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    border: 1px solid #eee;
 }
 
-.no-results button {
-    margin-top: 15px;
-    padding: 10px 20px;
-    background: #007bff;
+.search-page-container .search-item {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    border: none;
+    background: transparent;
+    padding: 0;
+}
+
+.search-page-container .search-item label {
+    font-size: 11px;
+    font-weight: 800;
+    color: var(--primary-blue);
+    text-transform: uppercase;
+    margin-bottom: 2px;
+    text-align: left;
+}
+
+.search-page-container .search-item input {
+    border: none !important;
+    outline: none !important;
+    font-size: 16px;
+    font-weight: 500;
+    width: 100%;
+    background: transparent;
+    color: #333;
+    padding: 0;
+}
+
+/* Кнопка-лупа */
+.search-page-container .search-btn-circle {
+    width: 58px;
+    height: 58px;
+    background-color: var(--primary-blue);
     color: white;
     border: none;
-    border-radius: 8px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     cursor: pointer;
+    transition: all 0.3s ease;
+    margin-left: 15px;
+    flex-shrink: 0;
 }
 
+.search-page-container .search-btn-circle:hover {
+    background-color: var(--hover-blue);
+    transform: scale(1.08) rotate(5deg);
+}
+
+/* Результаты */
+.search-page-container .results-header {
+    margin-bottom: 30px;
+    text-align: left;
+}
+
+.search-page-container .results-header h2 {
+    font-size: 1.8rem;
+    color: #222;
+    margin: 0;
+}
+
+.search-page-container .rooms-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 30px;
+}
+
+/* Сайдбар элементы */
+.search-page-container .filter-group {
+    margin-bottom: 25px;
+    text-align: left;
+}
+
+.search-page-container .checkbox-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    cursor: pointer;
+    font-size: 0.95rem;
+    color: #444;
+    padding: 4px 0;
+}
+
+.search-page-container .checkbox-item input {
+    accent-color: var(--primary-blue);
+    width: 17px;
+    height: 17px;
+}
+
+/* Ничего не найдено */
+.search-page-container .no-results {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 80px 0;
+    background: #f9f9f9;
+    border-radius: 20px;
+    border: 2px dashed #eee;
+}
