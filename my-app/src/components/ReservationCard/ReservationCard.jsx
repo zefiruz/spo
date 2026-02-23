@@ -1,6 +1,6 @@
 import useLocalStorage from '../../hooks/useLocalStorage';
 import { useBooking } from '../../context/BookingContex';
-import 'ReservationCard.css';
+import './ReservationCard.css';
 export const ResevationCard = ({ Reservation }) => {
     // Вызываем хук с ключом "hotels_data" и дефолтным пустым массивом
     const [rooms] = useLocalStorage('hotels_data', []);

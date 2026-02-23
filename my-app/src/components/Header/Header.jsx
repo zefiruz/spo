@@ -21,10 +21,10 @@ const Header = ({ OnOpenLogin}) => {
 
                     {user ?(
                         <Link to="/profile" className="link--item">
-                             <div className="link--content">
+                            <div className="link--content">
                                 <ProfileIcon className="link--icon"/>
-                            <span>{user?.login}</span>
-                             </div>
+                                <span>{user?.login}</span>
+                            </div>
 
                         </Link>
                     ):

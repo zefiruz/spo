@@ -20,10 +20,6 @@ h1{
     font-size: 50px;
 }
 
-/* span{
-    color: #FFFF;
-} */
-
 .links--container {
     display: flex;
     align-items: center;
@@ -35,6 +31,7 @@ h1{
     flex-direction: row;
     fill: #FFF;
     transition: transform 0.2s ease-in-out;
+    color: #FFFFFF;
 }
 
 .link--item:not(:last-child) {
