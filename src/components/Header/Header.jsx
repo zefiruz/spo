@@ -9,7 +9,7 @@ const Header = ({ OnOpenLogin }) => {
 
     return (
         <div className="Header__container">
-            <Link to="/">
+            <Link to="/booking">
                 <h1>SEA<span style={{ color: '#0088FF' }}>.</span>hotel</h1>
             </Link>
 
@@ -18,7 +18,7 @@ const Header = ({ OnOpenLogin }) => {
                 {user && (
                     <NavLink to="/my-booking" className="link--item">
                         <div className="link--content">
-                            <BadIcon className="link--icon"/>
+                            <BadIcon className="link--icon" />
                             <span>Бронирования</span>
                         </div>
                     </NavLink>
@@ -28,7 +28,7 @@ const Header = ({ OnOpenLogin }) => {
                 {user?.isAdmin && (
                     <NavLink to="/room" className="link--item">
                         <div className="link--content">
-                            <BadIcon className="link--icon"/>
+                            <BadIcon className="link--icon" />
                             <span>Управление номерами</span>
                         </div>
                     </NavLink>
@@ -38,14 +38,14 @@ const Header = ({ OnOpenLogin }) => {
                 {user ? (
                     <NavLink to="/profile" className="link--item">
                         <div className="link--content">
-                            <ProfileIcon className="link--icon"/>
+                            <ProfileIcon className="link--icon" />
                             <span>{user?.login}</span>
                         </div>
                     </NavLink>
                 ) : (
                     <button onClick={OnOpenLogin} className="link--item" style={{ background: 'none', border: 'none', cursor: 'pointer' }}>
                         <div className="link--content">
-                            <ProfileIcon className="link--icon"/>
+                            <ProfileIcon className="link--icon" />
                             <span>Войти</span>
                         </div>
                     </button>

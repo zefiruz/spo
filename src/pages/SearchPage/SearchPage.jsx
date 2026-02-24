@@ -28,7 +28,7 @@ const SearchPage = () => {
             <main className="results-section">
                 <div className="search-query-container">
                     <div className="search-bar">
-                        <div className="search-item">
+                        <div className="search-string-item">
                             <label>Поиск</label>
                             <input
                                 type="text"

@@ -27,6 +27,12 @@ export const BookingProvider = ({ children }) => {
             alert("Необходимо войти в систему");
             return false;
         }
+        const profileData = JSON.parse(localStorage.getItem(`profile_data_${user.login}`));
+
+        if (!profileData.phone && !profileData.email) {
+            alert(`Внесите в профиль номер телефона и/или email`);
+            return false;
+        }
 
         const newBooking = new Reservation(
             Date.now(),

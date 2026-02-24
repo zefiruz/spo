@@ -23,7 +23,7 @@ const useReservations = () => {
 
             // 2. Фильтр по гостям
             if (filters.guests && room.guestForRoom < filters.guests) return false;
-
+            if (filters.beds && room.bedsForRoom < filters.beds) return false;
             // 3. Фильтр по удобствам (params)
             if (filters.params && filters.params.length > 0) {
                 const roomParamsValues = Object.values(room.params);

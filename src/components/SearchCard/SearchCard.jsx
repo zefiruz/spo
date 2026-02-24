@@ -1,8 +1,8 @@
 import { useState, useRef } from 'react';
-import "./SearchCard.css"; 
+import "./SearchCard.css";
 import { useBooking } from '../../context/BookingContex';
 import { useFilters } from '../../context/FiltersContext';
-
+import  RoomDetailsModal from '../Modals/RoomDetailsModal'
 const hotelImages = [
     new URL('../../__mocks__/photo1.jpg', import.meta.url).href,
     new URL('../../__mocks__/photo2.jpg', import.meta.url).href,
@@ -11,8 +11,9 @@ const hotelImages = [
 
 const SearchCard = ({ room }) => {
     const [currentIndex, setCurrentIndex] = useState(0);
-    const {createBooking} = useBooking();
-    const {filters} = useFilters();
+    const { createBooking } = useBooking();
+    const { filters } = useFilters();
+    const [isDetailsOpen, setIsDetailsOpen] = useState(false);
     const timerRef = useRef(null);
 
     const startSlide = () => {
@@ -28,15 +29,16 @@ const SearchCard = ({ room }) => {
         }
         setCurrentIndex(0);
     };
-    const handleBooking = () =>{
-        createBooking(room.id, filters.startDate, filters.endDate);
+    const handleBooking = () => {
+        setIsDetailsOpen(true);
+        // createBooking(room.id, filters.startDate, filters.endDate);
     }
 
     return (
         <div className="hotel-card"
-         onMouseEnter={startSlide}
-         onMouseLeave={stopSlide}
-         onClick={handleBooking}>
+            onMouseEnter={startSlide}
+            onMouseLeave={stopSlide}
+            onClick={handleBooking}>
             <div className="hotel-card__image-container">
                 <img
                     src={hotelImages[currentIndex]}
@@ -62,7 +64,7 @@ const SearchCard = ({ room }) => {
 
                 <div className="hotel-card__details">
                     <span>👥 {room.guestForRoom} гостей</span>
-                    <span>🛏️ {room.badForRoom} кровати</span>
+                    <span>🛏️ {room.bedsForRoom} кровати</span>
                 </div>
 
                 <div className="hotel-card__params">
@@ -79,6 +81,11 @@ const SearchCard = ({ room }) => {
                     <button className="hotel-card__book-btn">Выбрать</button>
                 </div>
             </div>
+            <RoomDetailsModal
+                room={room}
+                isOpen={isDetailsOpen}
+                onClose={() => setIsDetailsOpen(false)}
+            />
         </div>
     );
 };

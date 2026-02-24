@@ -10,7 +10,7 @@ html, body {
     padding: 0;
     width: 100%;
     min-height: 100vh;
-    display: block; 
+    display: block;
     box-sizing: border-box;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }

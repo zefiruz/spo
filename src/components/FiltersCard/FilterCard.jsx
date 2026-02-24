@@ -17,6 +17,7 @@ const FilterCard = () => {
         updateFilters({
             minPrice: 0,
             maxPrice: 50000,
+            beds: 3,
             guests: 1,
             params: [],
         });
@@ -92,8 +93,10 @@ const FilterCard = () => {
                     <input
                         className="single-input"
                         type="number"
-                        min="0"
+                        min="1"
                         placeholder="0"
+                        value={filters.beds}
+                        onChange={(e) => updateFilters({ beds: e.target.value })}
                     />
                 </div>
             </div>
