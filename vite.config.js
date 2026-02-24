@@ -5,4 +5,5 @@ import svgr from 'vite-plugin-svgr' // 1. Импортируй
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react(), svgr()],
+  base: '/spo/',
 })
