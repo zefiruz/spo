@@ -10,7 +10,7 @@ import AppProvider from './context/AppProvider'
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <AppProvider>
-      <BrowserRouter>
+      <BrowserRouter basename="/spo">
         <App />
       </BrowserRouter>
     </AppProvider>
