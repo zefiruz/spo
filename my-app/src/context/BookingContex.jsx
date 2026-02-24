@@ -39,8 +39,10 @@ export const BookingProvider = ({ children }) => {
         setAllReservations([...allReservations, newBooking]);
         return true;
     };
-
     const cancelBooking = (bookingId) => {
+        updateBookingStatus(bookingId, 'cancelled')
+    }
+    const deleteBooking = (bookingId) => {
         setAllReservations(allReservations.filter(res => res.id !== bookingId));
     };
 

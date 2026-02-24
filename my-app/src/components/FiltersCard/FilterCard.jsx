@@ -25,12 +25,12 @@ const FilterCard = () => {
     const formatDate = (date) => {
         if (!date) return '';
         const d = new Date(date);
-        
+
         const year = d.getFullYear();
-        
-        const month = String(d.getMonth() + 1).padStart(2, '0'); 
+
+        const month = String(d.getMonth() + 1).padStart(2, '0');
         const day = String(d.getDate()).padStart(2, '0');
-        
+
         return `${year}-${month}-${day}`; // Формат YYYY-MM-DD
     };
 
@@ -44,7 +44,7 @@ const FilterCard = () => {
                     <input
                         type="number"
                         placeholder="От"
-                        value={filters.minPrice || ''}
+                        value={filters.minPrice}
                         onChange={(e) => updateFilters({ minPrice: e.target.value })}
                     />
                     <div className="dual-input__divider"></div>
@@ -60,15 +60,17 @@ const FilterCard = () => {
             <div className="filter-section">
                 <label className="filter-section__label">Даты пребывания</label>
                 <div className="dual-input">
-                    <input 
-                        type="date" 
-                        value={formatDate(filters.startDate)} 
+                    <input
+                        type="date"
+                        value={formatDate(filters.startDate)}
+                        max={filters.endDate ? formatDate(filters.endDate) : undefined}
                         onChange={(e) => updateFilters({ startDate: new Date(e.target.value) })}
                     />
                     <div className="dual-input__divider"></div>
-                    <input 
-                        type="date" 
-                        value={formatDate(filters.endDate)} 
+                    <input
+                        type="date"
+                        value={formatDate(filters.endDate)}
+                        min={filters.startDate ? formatDate(filters.startDate) : undefined}
                         onChange={(e) => updateFilters({ endDate: new Date(e.target.value) })}
                     />
                 </div>
@@ -102,10 +104,10 @@ const FilterCard = () => {
                     {['Кондиционер', 'Wi-Fi', 'Минибар', 'Сейф'].map(item => (
                         <label key={item} className="checkbox-container">
                             <span className="checkbox-label">{item}</span>
-                            <input 
-                                type="checkbox" 
+                            <input
+                                type="checkbox"
                                 checked={filters.params?.includes(item.toLowerCase())}
-                                onChange={() => handleParamChange(item.toLowerCase())} 
+                                onChange={() => handleParamChange(item.toLowerCase())}
                             />
                             <span className="custom-checkbox"></span>
                         </label>

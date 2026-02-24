@@ -1,5 +1,5 @@
 import { useState, useRef } from 'react';
-import "./SearchCard.css"; // Не забудь раскомментировать импорт
+import "./SearchCard.css"; 
 import { useBooking } from '../../context/BookingContex';
 import { useFilters } from '../../context/FiltersContext';
 

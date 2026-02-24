@@ -1,0 +1,165 @@
+.admin-rooms-page {
+    padding: 40px;
+    max-width: 1200px;
+    margin: 0 auto;
+    font-family: 'Inter', sans-serif;
+}
+
+.admin-rooms-page .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.admin-rooms-page h1 {
+    font-size: 24px;
+    font-weight: 800;
+    color: #1a1a1a;
+}
+
+.add-btn {
+    background: #0088FF;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.add-btn:hover {
+    background: #0066CC;
+}
+
+/* Стили таблицы */
+.rooms-table {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+    overflow: hidden;
+    border: 1px solid #eee;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+}
+
+thead {
+    background: #f8f9fa;
+}
+
+th {
+    padding: 16px;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: #666;
+    border-bottom: 2px solid #eee;
+}
+
+td {
+    padding: 16px;
+    border-bottom: 1px solid #eee;
+    font-size: 15px;
+    color: #333;
+}
+
+tr:hover {
+    background: #fcfcfc;
+}
+
+/* Кнопки в таблице */
+.action-btns {
+    display: flex;
+    gap: 10px;
+}
+
+.edit-btn {
+    background: #f0f7ff;
+    color: #0088FF;
+    border: 1px solid #0088FF;
+    padding: 6px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.delete-btn {
+    background: #fff0f0;
+    color: #ff385c;
+    border: 1px solid #ff385c;
+    padding: 6px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.delete-btn:hover { background: #ff385c; color: white; }
+.edit-btn:hover { background: #0088FF; color: white; }
+
+.admin-filters {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+    background: #fff;
+    padding: 15px 20px;
+    border-radius: 12px;
+    margin-bottom: 20px;
+    border: 1px solid #eee;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+}
+
+.admin-search-input {
+    flex: 1;
+    padding: 10px 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    outline: none;
+    font-size: 14px;
+}
+
+.admin-search-input:focus {
+    border-color: #0088FF;
+}
+
+.admin-select-filter {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background: white;
+    outline: none;
+    cursor: pointer;
+}
+
+.admin-stats {
+    font-size: 14px;
+    color: #666;
+    border-left: 1px solid #eee;
+    padding-left: 15px;
+}
+
+/* Бейджи для типов комнат */
+.type-badge {
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.type-badge.Standard { background: #e3f2fd; color: #1976d2; }
+.type-badge.Deluxe { background: #f3e5f5; color: #7b1fa2; }
+.type-badge.Suite { background: #fff3e0; color: #ef6c00; }
+
+.bold-td { font-weight: 600; color: #1a1a1a; }
+.price-td { font-weight: 700; color: #27ae60; }
+
+.params-list {
+    max-width: 250px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 13px;
+    color: #777;
+}

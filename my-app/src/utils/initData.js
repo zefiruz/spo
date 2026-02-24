@@ -8,9 +8,10 @@ const initialRooms = [
         "Deluxe",
         15000,
         2, 2,
-                {
-            1: "codei"
-        }
+                [
+                                "кондиционер"
+                ]
+
     ),
     new Reservation(
         2,
@@ -18,20 +19,22 @@ const initialRooms = [
         "Уютный номер для двоих",
         "Standard",
         5000, 1, 2,
-        {
-            1: "codei"
-        }
+        [
+            "codei"
+]
     ),
     new Reservation(
         3,
         "Семейный номер",
         "Две комнаты и детская кровать",
         "Family",
-        8000, 3, 4,{
-            1: "codei",
-            2: "minibar",
-            3: "wifi"
-        },
+        8000, 3, 4,[
+            "кондионер",
+            "минибар",
+            "wi-fi"
+        ]
+
+
     )
 ];
 

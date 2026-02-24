@@ -1,6 +1,7 @@
 import { AuthProvider } from './AuthContext';
 import { BookingProvider } from './BookingContex';
 import { FiltersProvider } from './FiltersContext';
+import { RoomProvider } from './RoomContext';
 
 
 const ComposeProviders = ({ providers, children }) => {
@@ -16,7 +17,7 @@ const ComposeProviders = ({ providers, children }) => {
 
 const AppProvider = ({ children }) => {
     return (
-        <ComposeProviders providers={[AuthProvider, FiltersProvider, BookingProvider]}>
+        <ComposeProviders providers={[AuthProvider, FiltersProvider, BookingProvider, RoomProvider]}>
             {children}
         </ComposeProviders>
     );

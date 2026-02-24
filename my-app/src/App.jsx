@@ -10,6 +10,7 @@ import MainPage from './pages/MainPage/MainPage'
 import SearchPage from './pages/SearchPage/SearchPage'
 import BookingPage from './pages/BookingPage/BookingPage'
 import ProfilePage from './pages/ProfilePage/ProfilePage'
+import AdminRoomsPage from './pages/AdminRoomPage/AdminRoomPage'
 
 
 function App() {
@@ -51,6 +52,7 @@ function App() {
         <Route path="booking" element={<SearchPage />} />
         <Route path="my-booking" element={<BookingPage />} />
         <Route path='profile' element={<ProfilePage onLogout={onLogout} user={user} />} />
+        <Route path='room' element={<AdminRoomsPage />} />
       </Routes>
     </>
   )
