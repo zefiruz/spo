@@ -45,7 +45,7 @@ const ProfilePage = () => {
 
     useEffect(() => {
         if (user) {
-            const savedData = localStorage.getItem(`profile_data_${user.login}`);
+            const savedData = localStorage.getItem(`profile_data_${user.id}`);
             if (savedData) {
                 setFormData(JSON.parse(savedData));
             } else {
@@ -85,7 +85,7 @@ const ProfilePage = () => {
             return; // Прерываем сохранение
         }
 
-        localStorage.setItem(`profile_data_${user.login}`, JSON.stringify(formData));
+        localStorage.setItem(`profile_data_${user.id}`, JSON.stringify(formData));
         setShowToast(true);
         setTimeout(() => setShowToast(false), 3000);
     };
