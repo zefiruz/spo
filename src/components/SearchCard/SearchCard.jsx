@@ -2,7 +2,7 @@ import { useState, useRef } from 'react';
 import "./SearchCard.css";
 import { useBooking } from '../../context/BookingContex';
 import { useFilters } from '../../context/FiltersContext';
-import  RoomDetailsModal from '../Modals/RoomDetailsModal'
+import RoomDetailsModal from '../Modals/RoomDetailsModal'
 const hotelImages = [
     new URL('../../__mocks__/photo1.jpg', import.meta.url).href,
     new URL('../../__mocks__/photo2.jpg', import.meta.url).href,
@@ -30,8 +30,8 @@ const SearchCard = ({ room }) => {
         setCurrentIndex(0);
     };
     const handleBooking = () => {
-        setIsDetailsOpen(true);
-        // createBooking(room.id, filters.startDate, filters.endDate);
+        // setIsDetailsOpen(true);
+        createBooking(room.id, filters.startDate, filters.endDate);
     }
 
     return (
