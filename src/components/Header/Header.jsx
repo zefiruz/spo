@@ -7,14 +7,17 @@ import ProfileIcon from '../../lib/icons/account_circle.svg?react'
 const Header = ({ OnOpenLogin }) => {
     const { user } = useAuth();
 
+    const logoRedirectPath = user?.isAdmin ? "/my-booking" : "/booking";
+
     return (
         <div className="Header__container">
-            <Link to="/booking">
+            <Link to={logoRedirectPath}>
                 <h1>SEA<span style={{ color: '#0088FF' }}>.</span>hotel</h1>
             </Link>
 
             <div className="links--container">
-                {/* Ссылка на бронирования (скрываем, если не залогинен) */}
+                
+                {/* Ссылка на бронирования */}
                 {user && (
                     <NavLink to="/my-booking" className="link--item">
                         <div className="link--content">
@@ -43,7 +46,7 @@ const Header = ({ OnOpenLogin }) => {
                         </div>
                     </NavLink>
                 ) : (
-                    <button onClick={OnOpenLogin} className="link--item" style={{ background: 'none', border: 'none', cursor: 'pointer' }}>
+                    <button onClick={OnOpenLogin} className="link--item" style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 0 }}>
                         <div className="link--content">
                             <ProfileIcon className="link--icon" />
                             <span>Войти</span>

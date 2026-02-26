@@ -151,25 +151,21 @@ const ProfilePage = () => {
                     <div className="stats-section">
                         <h3>Статистика</h3>
                         <div className="stats-grid">
-                            {/* Принятые */}
                             <div className="stat-card confirmed">
                                 <span className="stat-value">{stats.accepted}</span>
                                 <span className="stat-label">Принятые</span>
                             </div>
 
-                            {/* В обработке */}
                             <div className="stat-card pending">
                                 <span className="stat-value">{stats.pending}</span>
                                 <span className="stat-label">В обработке</span>
                             </div>
 
-                            {/* Отмененные */}
                             <div className="stat-card cancelled">
                                 <span className="stat-value">{stats.cancelled}</span>
                                 <span className="stat-label">Отмененные</span>
                             </div>
 
-                            {/* Всего */}
                             <div className="stat-card total">
                                 <span className="stat-value">{stats.total}</span>
                                 <span className="stat-label">Всего</span>
