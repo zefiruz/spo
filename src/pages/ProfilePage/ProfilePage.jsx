@@ -33,15 +33,15 @@ const ProfilePage = () => {
         return String(phone).match(/^(\+7|7|8)?[\s\-]?\(?[489][0-9]{2}\)?[\s\-]?([0-9]{3})[\s\-]?([0-9]{2})[\s\-]?([0-9]{2})$/);
     };
 
-    const stats = useMemo(() => {
-        if (!userReservations) return { total: 0, confirmed: 0, cancelled: 0, finished: 0 };
+   const stats = useMemo(() => {
+        if (!userReservations) return { total: 0, accepted: 0, pending: 0, cancelled: 0 };
         return {
             total: userReservations.length,
-            confirmed: userReservations.filter(r => r.status === 'confirmed').length,
+            accepted: userReservations.filter(r => r.status === 'confirmed' || r.status === 'finished').length,
+            pending: userReservations.filter(r => r.status === 'pending').length,
             cancelled: userReservations.filter(r => r.status === 'cancelled').length,
-            finished: userReservations.filter(r => r.status === 'finished').length,
         };
-    }, [userReservations]);
+}, [userReservations]);
 
     useEffect(() => {
         if (user) {
@@ -148,9 +148,33 @@ const ProfilePage = () => {
                     <button className="save-profile-btn" onClick={handleSave}>Сохранить изменения</button>
                     {showToast && <div className="toast-success">Данные успешно сохранены!</div>}
 
-                    {/* Секция статистики остается без изменений */}
                     <div className="stats-section">
-                        {/* ... код статистики ... */}
+                        <h3>Статистика</h3>
+                        <div className="stats-grid">
+                            {/* Принятые */}
+                            <div className="stat-card confirmed">
+                                <span className="stat-value">{stats.accepted}</span>
+                                <span className="stat-label">Принятые</span>
+                            </div>
+
+                            {/* В обработке */}
+                            <div className="stat-card pending">
+                                <span className="stat-value">{stats.pending}</span>
+                                <span className="stat-label">В обработке</span>
+                            </div>
+
+                            {/* Отмененные */}
+                            <div className="stat-card cancelled">
+                                <span className="stat-value">{stats.cancelled}</span>
+                                <span className="stat-label">Отмененные</span>
+                            </div>
+
+                            {/* Всего */}
+                            <div className="stat-card total">
+                                <span className="stat-value">{stats.total}</span>
+                                <span className="stat-label">Всего</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

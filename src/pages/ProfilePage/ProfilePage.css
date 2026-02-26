@@ -157,7 +157,7 @@ button {
 }
 
 .stat-label {
-    font-size: 0.75rem;
+    font-size: 0.7rem;
     color: #777;
     text-transform: uppercase;
     letter-spacing: 0.5px;
@@ -226,3 +226,13 @@ button {
     from { opacity: 0; transform: translateY(-5px); }
     to { opacity: 1; transform: translateY(0); }
 }
+
+
+.stat-card.pending .stat-value { 
+    color: #f39c12; /* Оранжевый для "В обработке" */
+}
+
+.stat-card.total .stat-value { 
+    color: #34495e; /* Темно-серый для общего счета */
+}
+
