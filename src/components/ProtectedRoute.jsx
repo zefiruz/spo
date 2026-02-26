@@ -1,24 +1,21 @@
-import React from 'react';
+import { useAuth } from "../context/AuthContext";
 import { Navigate, useLocation, Outlet } from 'react-router-dom';
-import { useAuth } from '../context/AuthContext';
-
-const ProtectedRoute = ({ allowedRoles, deniedRoles }) => {
+export const ProtectedRoute = ({ allowedRoles }) => {
     const { user } = useAuth();
-    const location = useLocation();
 
-    if (user) {
-        user.role = user.isAdmin ? 'admin' : 'client';
-    }
-    const hasAccess = !user
-        ? (!!allowedRoles || !!deniedRoles)
-        : (deniedRoles ? deniedRoles.includes(user.role) : !allowedRoles.includes(user.role));
+    // Определяем роль "на лету", не меняя user.role в стейте
+    const currentRole = user ? (user.isAdmin ? 'admin' : 'user') : 'guest';
 
-    if (hasAccess) {
+    const isForbidden = () => {
+        if (allowedRoles) {
+            return !allowedRoles.includes(currentRole);
+        }
+        return false;
+    };
+
+    if (isForbidden()) {
         return <Navigate to="/unauthorized" replace />;
     }
 
-    // Если всё ок — рендерим дочерние роуты (через Outlet для удобства групп)
     return <Outlet />;
 };
-
-export default ProtectedRoute;

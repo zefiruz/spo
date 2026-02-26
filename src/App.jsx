@@ -11,7 +11,7 @@ import SearchPage from './pages/SearchPage/SearchPage'
 import BookingPage from './pages/BookingPage/BookingPage'
 import ProfilePage from './pages/ProfilePage/ProfilePage'
 import AdminRoomsPage from './pages/AdminRoomPage/AdminRoomPage'
-import ProtectedRoute from './components/ProtectedRoute'
+import {ProtectedRoute} from './components/ProtectedRoute'
 
 
 function App() {
@@ -51,7 +51,7 @@ function App() {
 
       <Routes>
         <Route path="/unauthorized" element={<div>У вас нет прав доступа к этой странице</div>} />
-        <Route element={<ProtectedRoute deniedRoles={['admin']} />}>
+        <Route element={<ProtectedRoute allowedRoles={['user', 'guest']} />}>
           <Route path="/" element={<MainPage />} />
           <Route path="/booking" element={<SearchPage />} />
         </Route>
@@ -61,7 +61,7 @@ function App() {
           <Route path="/admin/edit-rooms" element={<AdminRoomsPage />} />
         </Route>
 
-        <Route element={<ProtectedRoute allowedRoles={['client', 'admin']} />}>
+        <Route element={<ProtectedRoute allowedRoles={['user', 'admin']} />}>
           <Route path='profile' element={<ProfilePage onLogout={onLogout} user={user} />} />
           <Route path="my-booking" element={<BookingPage />} />
         </Route>
