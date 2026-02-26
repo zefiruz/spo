@@ -293,6 +293,12 @@ form input:focus {
 }
 
 .primary-btn {
-    background: #ff385c;
+    background: #326bfd;
     color: white;
+}
+
+
+.middle-width-modal{
+  flex-direction: column !important;
+  width: 40% !important;
 }

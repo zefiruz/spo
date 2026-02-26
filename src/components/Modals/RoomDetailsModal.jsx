@@ -17,15 +17,15 @@ const RoomDetailsModal = ({ room, isOpen, onClose }) => {
     if (!isOpen || !room) return null;
 
     const calculateDaysBetween = (startDate, endDate) => {
-    // Превращаем входные данные в объекты Date, если они еще не ими являются
-    const start = new Date(startDate);
-    const end = new Date(endDate);
-    start.setHours(0, 0, 0, 0);
-    end.setHours(0, 0, 0, 0);
-    const diffInMs = end - start;
-    const diffInDays = diffInMs / (1000 * 60 * 60 * 24);
-    return Math.abs(diffInDays);
-};
+        // Превращаем входные данные в объекты Date, если они еще не ими являются
+        const start = new Date(startDate);
+        const end = new Date(endDate);
+        start.setHours(0, 0, 0, 0);
+        end.setHours(0, 0, 0, 0);
+        const diffInMs = end - start;
+        const diffInDays = diffInMs / (1000 * 60 * 60 * 24);
+        return Math.abs(diffInDays);
+    };
 
     const countPrice = () => {
         return calculateDaysBetween(filters.startDate, filters.endDate) * room.cost;
@@ -44,14 +44,14 @@ const RoomDetailsModal = ({ room, isOpen, onClose }) => {
         <div className="modal-overlay" onClick={onClose}>
             <div className="modal-content" onClick={(e) => e.stopPropagation()}>
                 <button className="close-btn" onClick={onClose}>&times;</button>
-                    <div className="room-details__images-container">
-                        <div className="images-container__main-img">
-                            <img src={hotelImages[tempindexImage]}></img>
-                        </div>
-                        <div className='room-details__small-images-container'>
-                                                    {hotelImages?.map((img, index) => (
+                <div className="room-details__images-container">
+                    <div className="images-container__main-img">
+                        <img src={hotelImages[tempindexImage]}></img>
+                    </div>
+                    <div className='room-details__small-images-container'>
+                        {hotelImages?.map((img, index) => (
                             <img
-                                onMouseEnter={() => {setTempIndexImage(index)}}
+                                onMouseEnter={() => { setTempIndexImage(index) }}
                                 onMouseLeave={() => setTempIndexImage(indexImage)}
                                 onClick={() => setIndexImage(index)}
                                 key={index}
@@ -60,18 +60,18 @@ const RoomDetailsModal = ({ room, isOpen, onClose }) => {
                                 className={index == indexImage ? "img__item selected-img" : "img__item"}
                             />
                         ))}
-                        </div>
                     </div>
+                </div>
                 <div className="room-details__content-container">
                     <h2>{room.title}</h2>
                     <p>Почему это важно (Нюанс с временем)
-Если не сбрасывать часы в 00:00:00, то при разнице, например, в 23 часа функция может вернуть 0.95 дня, и при округлении Math.floor ты получишь ноль. Сброс времени гарантирует, что ты считаешь "ночи" в отеле.
+                        Если не сбрасывать часы в 00:00:00, то при разнице, например, в 23 часа функция может вернуть 0.95 дня, и при округлении Math.floor ты получишь ноль. Сброс времени гарантирует, что ты считаешь "ночи" в отеле.
 
-Полезная мелочь
-Если тебе нужно посчитать разницу для отображения "С 1-го по 3-е число" как 3 дня (включая день выезда как полный день), просто добавь + 1 к результату:
-const totalDays = calculateDaysBetween(d1, d2) + 1;
+                        Полезная мелочь
+                        Если тебе нужно посчитать разницу для отображения "С 1-го по 3-е число" как 3 дня (включая день выезда как полный день), просто добавь + 1 к результату:
+                        const totalDays = calculateDaysBetween(d1, d2) + 1;
 
-Хочешь, чтобы мы добавили в твою модалку автоматический расчет цены, который меняется сразу, как только пользователь двигает ползунки дат?</p>
+                        Хочешь, чтобы мы добавили в твою модалку автоматический расчет цены, который меняется сразу, как только пользователь двигает ползунки дат?</p>
                     <div className="hotel-card__params">
                         {Object.values(room.params || {}).map((param, index) => (
                             <span key={index} className="param-tag">{param}</span>
@@ -96,7 +96,7 @@ const totalDays = calculateDaysBetween(d1, d2) + 1;
                     </div>
                     <div className="room-details__buy-section">
                         <div className='buy-section__cost'>{countPrice()}</div>
-                        <button className="hotel-card__book-btn" onClick={() => createBooking(room.id)}>Выбрать</button>
+                        <button className="hotel-card__book-btn" onClick={() => { createBooking(room.id); onClose(); }}>Выбрать</button>
                     </div>
                 </div>
             </div>

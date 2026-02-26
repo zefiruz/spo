@@ -11,6 +11,7 @@ import SearchPage from './pages/SearchPage/SearchPage'
 import BookingPage from './pages/BookingPage/BookingPage'
 import ProfilePage from './pages/ProfilePage/ProfilePage'
 import AdminRoomsPage from './pages/AdminRoomPage/AdminRoomPage'
+import ProtectedRoute from './components/ProtectedRoute'
 
 
 function App() {
@@ -47,13 +48,32 @@ function App() {
           setUser={setUser}
           onClose={() => closeModal()} />}
 
+
       <Routes>
+        <Route path="/unauthorized" element={<div>У вас нет прав доступа к этой странице</div>} />
+        <Route element={<ProtectedRoute deniedRoles={['admin']} />}>
+          <Route path="/" element={<MainPage />} />
+          <Route path="/booking" element={<SearchPage />} />
+        </Route>
+
+
+        <Route element={<ProtectedRoute allowedRoles={['admin']} />}>
+          <Route path="/admin/edit-rooms" element={<AdminRoomsPage />} />
+        </Route>
+
+        <Route element={<ProtectedRoute allowedRoles={['client', 'admin']} />}>
+          <Route path='profile' element={<ProfilePage onLogout={onLogout} user={user} />} />
+          <Route path="my-booking" element={<BookingPage />} />
+        </Route>
+
+      </Routes>
+      {/* <Routes>
         <Route path="/" element={<MainPage />} />
         <Route path="booking" element={<SearchPage />} />
         <Route path="my-booking" element={<BookingPage />} />
         <Route path='profile' element={<ProfilePage onLogout={onLogout} user={user} />} />
         <Route path='room' element={<AdminRoomsPage />} />
-      </Routes>
+      </Routes> */}
     </>
   )
 }
