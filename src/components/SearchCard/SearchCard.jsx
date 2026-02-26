@@ -29,8 +29,8 @@ const SearchCard = ({ room }) => {
         }
         setCurrentIndex(0);
     };
+    
     const handleBooking = () => {
-        // setIsDetailsOpen(true);
         createBooking(room.id, filters.startDate, filters.endDate);
     }
 

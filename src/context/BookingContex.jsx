@@ -68,7 +68,6 @@ export const BookingProvider = ({ children }) => {
         getAllReservations,
         createBooking,
         cancelBooking,
-        updateBookingStatus
     };
 
     return (
