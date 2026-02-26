@@ -2,6 +2,8 @@ import React, { createContext, useContext, useMemo } from 'react';
 import useLocalStorage from '../hooks/useLocalStorage';
 import { useAuth } from './AuthContext';
 import { Reservation } from '../models/Reservation'
+import { useFilters } from './FiltersContext';
+import { useModal } from './ModalContext';
 
 const BookingContext = createContext();
 
@@ -9,6 +11,8 @@ export const BookingProvider = ({ children }) => {
     // Используем твой надежный хук для хранения всех бронирований приложения
     const [allReservations, setAllReservations] = useLocalStorage("reservations", []);
     const { user } = useAuth();
+    const { filters } = useFilters();
+    const {openNoContactsModal } = useModal();
 
     const getAllReservations = () => allReservations;
 
@@ -22,22 +26,22 @@ export const BookingProvider = ({ children }) => {
         return allReservations.filter(res => res.userId === user.id);
     }, [allReservations, user]);
 
-    const createBooking = (roomId, startDate, endDate) => {
+    const createBooking = (roomId) => {
         if (!user) {
-            alert("Необходимо войти в систему");
+            ("Необходимо войти в систему");
             return false;
         }
         const profileData = JSON.parse(localStorage.getItem(`profile_data_${user.id}`));
         if (!profileData || (!profileData.phone && !profileData.email)) {
-            alert(`Внесите в профиль номер телефона и/или email`);
+            openNoContactsModal();
             return false;
         }
 
         const newBooking = new Reservation(
             Date.now(),
             user.id,
-            startDate,
-            endDate,
+            filters.startDate,
+            filters.endDate,
             roomId,
         )
 

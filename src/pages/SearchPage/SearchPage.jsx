@@ -5,11 +5,14 @@ import { useFilters } from '../../context/FiltersContext';
 import FilterCard from "../../components/FiltersCard/FilterCard";
 import SearchIcon from '../../lib/icons/search.svg?react';
 import './SearchPage.css';
+import RoomDetailsModal from '../../components/Modals/RoomDetailsModal';
 
 const SearchPage = () => {
     const { filters, updateFilters } = useFilters();
     const { getFilteredRooms } = useReservations();
     const [searchQuery, setSearchQuery] = useState("");
+    const [isDetailsOpen, setIsDetailsOpen] = useState(false);
+    const [selectedRoom, setSelectedRoom] = useState(null);
 
     // Сначала фильтруем по параметрам из FilterCard
     const filteredByParams = getFilteredRooms(filters);
@@ -51,7 +54,11 @@ const SearchPage = () => {
                 <div className="rooms-grid">
                     {availableRooms.length > 0 ? (
                         availableRooms.map(room => (
-                            <SearchCard key={room.id} room={room} />
+                            <SearchCard
+                                key={room.id}
+                                room={room}
+                                setIsDetailsOpen ={setIsDetailsOpen}
+                                setSelectedRoom = {setSelectedRoom} />
                         ))
                     ) : (
                         <div className="no-results">
@@ -66,6 +73,13 @@ const SearchPage = () => {
                     )}
                 </div>
             </main>
+            <RoomDetailsModal
+            isOpen={isDetailsOpen}
+            room={selectedRoom}
+            onClose={() => {
+                setIsDetailsOpen(false);
+                setSelectedRoom(null);}
+            }/>
         </div>
     );
 };
