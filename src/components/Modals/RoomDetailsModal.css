@@ -1,94 +1,158 @@
-.modal-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
+/* Основной контейнер для изображений */
+.room-details__images-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column; /* Большая картинка сверху, список снизу */
+    gap: 12px; /* Расстояние между основным фото и миниатюрами */
+    width: 100%;
+}
+
+/* Скругление для всех изображений в контейнере */
+.room-details__images-container img {
+    border-radius: 12px;
+    object-fit: cover; /* Чтобы фото не искажались при изменении размера */
+}
+
+/* Большая центральная картинка */
+.images-container__main-img {
+    width: 100%;
+    height: 350px; /* Можешь настроить высоту под себя */
+    overflow: hidden;
+    border-radius: 12px;
+}
+
+.images-container__main-img img {
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.6);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
-    backdrop-filter: blur(5px);
+    transition: opacity 0.3s ease; /* Плавная смена фото */
 }
 
+.room-details__small-images-container {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: flex-start;
+    gap: 10px;
+}
+
+/* Общий стиль для миниатюр (кроме основной картинки) */
+/* Мы обращаемся к img, которые НЕ внутри main-img */
+.img__item {
+    width: 80px;
+    height: 60px;
+    cursor: pointer;
+    transition: transform 0.3s ease, filter 0.3s ease;
+    border: 2px solid transparent;
+}
+
+/* Ховер эффект: увеличение */
+.img__item:hover {
+    transform: scale(1.25); /* Увеличение в 1.25 раза */
+    z-index: 10; /* Чтобы при увеличении картинка была над соседями */
+}
+
+/* Эффект выбранной картинки: белая маска (забеление) */
+.selected-img {
+    opacity: 50%; /* Можно добавить белую рамку для акцента */
+}
+
+/* Основной контейнер внутри модалки */
 .modal-content {
-    background: white;
-    width: 900px;
-    max-width: 95%;
-    border-radius: 24px;
-    position: relative;
-    overflow: hidden;
-    animation: slideUp 0.3s ease-out;
-}
-
-@keyframes slideUp {
-    from { transform: translateY(50px); opacity: 0; }
-    to { transform: translateY(0); opacity: 1; }
-}
-
-.modal-body {
     display: flex;
-    height: 500px;
+    flex-direction: row; /* Делим экран по горизонтали */
+    gap: 30px;
+    max-width: 900px;
+    width: 95%;
+    padding: 25px;
+    align-items: stretch;
 }
 
-/* Левая сторона */
-.modal-info {
-    flex: 1;
-    padding: 40px;
+/* 40% для контейнера с картинками */
+.room-details__container {
+    flex: 0 0 40%;
     display: flex;
     flex-direction: column;
 }
 
-.modal-title {
-    font-size: 28px;
-    margin-bottom: 20px;
-    color: #1a1a1a;
+/* 60% для контейнера с контентом */
+.room-details__content-container {
+    flex: 0 0 60%;
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    padding-right: 30px; /* Название и прочее прижато к левому краю */
 }
 
-.modal-description {
-    color: #5e5e5e;
+/* Заголовок */
+.room-details__content-container h2 {
+    margin-top: 0;
+    font-size: 24px;
+    color: #333;
+}
+
+/* Описание выровнено по ширине */
+.room-details__content-container p {
+    text-align: justify;
     line-height: 1.6;
-    flex-grow: 1;
+    color: #666;
+    margin: 15px 0;
 }
 
-/* Правая сторона */
-.modal-gallery {
-    flex: 1.2;
-    background: #f0f0f0;
+/* Выбор дат (не более 60% ширины от своей колонки) */
+.room-detels__date-seletor {
+    max-width: 60%;
+    margin-bottom: 20px;
 }
 
-.modal-gallery img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+.dual-input {
+    display: flex;
+    align-items: center;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 5px;
+    background: #f9f9f9;
 }
 
-.modal-close {
-    position: absolute;
-    top: 20px;
-    left: 20px; /* Чтобы не перекрывать картинку */
-    background: white;
+.dual-input input {
     border: none;
-    font-size: 30px;
-    cursor: pointer;
-    z-index: 10;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-}
-
-.confirm-btn {
-    background: #0088FF;
-    color: white;
-    border: none;
-    padding: 15px 30px;
-    border-radius: 12px;
-    font-weight: 700;
-    cursor: pointer;
+    background: transparent;
+    padding: 8px;
     width: 100%;
-    transition: 0.2s;
+    font-size: 14px;
+    outline: none;
 }
 
-.confirm-btn:hover { background: #0076D6; }
+/* Секция покупки (Цена и кнопка) */
+.room-details__buy-section {
+    margin-top: auto; /* Прижимает всю секцию к низу контейнера */
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+/* Цена жирным */
+.buy-section__cost {
+    font-size: 22px;
+    font-weight: 800; /* Очень жирный */
+    color: #222;
+}
+
+
+
+/* Адаптив: если экран маленький, колонки станут друг под друга */
+@media (max-width: 768px) {
+    .modal-content {
+        flex-direction: column;
+        max-height: 90vh;
+        overflow-y: auto;
+    }
+    .room-details__container, .room-details__content-container {
+        flex: 0 0 100%;
+    }
+    .room-detels__date-seletor {
+        max-width: 100%;
+    }
+}

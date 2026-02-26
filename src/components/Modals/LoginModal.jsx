@@ -4,18 +4,18 @@ import { useState } from 'react';
 
 const LoginModal = ({ onClose, OnOpenSignUp }) => {
   const { users, login } = useAuth();
-  
+
   // ВАЖНО: Всегда ставим пустую строку '', чтобы не было ошибки "uncontrolled input"
-  const [inputLogin, setInputLogin] = useState(''); 
+  const [inputLogin, setInputLogin] = useState('');
   const [password, setPassword] = useState(''); // Проверь, что имя совпадает с тем, что в value ниже
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
 
   const handleLogin = (e) => {
     e.preventDefault();
-    
+
     // Ищем пользователя в массиве
     const user = users.find(u => inputLogin === u.login);
-    
+
     if (user && user.password === password) {
       login(user);
       onClose();
@@ -26,7 +26,7 @@ const LoginModal = ({ onClose, OnOpenSignUp }) => {
 
   return (
     <div className="modal-overlay" onClick={onClose}>
-      <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+      <div className="modal-content middle-width-modal" onClick={(e) => e.stopPropagation()}>
         <button className="close-btn" onClick={onClose}>×</button>
         <h2>Вход</h2>
 
@@ -73,9 +73,9 @@ const LoginModal = ({ onClose, OnOpenSignUp }) => {
 
           <div className="modal-actions">
             <button className="login-btn" type="submit">Войти</button>
-            <button 
-                className="signup-btn" 
-                type="button" 
+            <button
+                className="signup-btn"
+                type="button"
                 onClick={(e) => {
                     e.preventDefault();
                     OnOpenSignUp();

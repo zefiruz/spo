@@ -106,7 +106,6 @@ const ProfilePage = () => {
                 <div className="profile-main">
                     <h3>Контактная информация</h3>
                     <div className="info-grid">
-                        {/* Поля Имя, Фамилия, Отчество остаются без изменений */}
                         <div className="info-item">
                             <label>Имя</label>
                             <input type="text" name="firstName" value={formData.firstName} onChange={handleChange} placeholder="Ваше имя" />
@@ -120,7 +119,6 @@ const ProfilePage = () => {
                             <input type="text" name="middleName" value={formData.middleName} onChange={handleChange} placeholder="Ваше отчество" />
                         </div>
 
-                        {/* Поле Телефона с ошибкой */}
                         <div className="info-item">
                             <label>Телефон</label>
                             <input
@@ -134,7 +132,6 @@ const ProfilePage = () => {
                             {errors.phone && <span className="error-text">{errors.phone}</span>}
                         </div>
 
-                        {/* Поле Email с ошибкой */}
                         <div className="info-item full-width">
                             <label>Email</label>
                             <input

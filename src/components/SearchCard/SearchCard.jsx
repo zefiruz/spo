@@ -9,11 +9,10 @@ const hotelImages = [
     new URL('../../__mocks__/photo3.jpg', import.meta.url).href,
 ];
 
-const SearchCard = ({ room }) => {
+const SearchCard = ({ room, setIsDetailsOpen, setSelectedRoom}) => {
     const [currentIndex, setCurrentIndex] = useState(0);
-    const { createBooking } = useBooking();
-    const { filters } = useFilters();
-    const [isDetailsOpen, setIsDetailsOpen] = useState(false);
+    // const { createBooking } = useBooking();
+    // const { filters } = useFilters();
     const timerRef = useRef(null);
 
     const startSlide = () => {
@@ -31,6 +30,7 @@ const SearchCard = ({ room }) => {
     };
     
     const handleBooking = () => {
+        // setIsDetailsOpen(true);
         createBooking(room.id, filters.startDate, filters.endDate);
     }
 
@@ -81,11 +81,6 @@ const SearchCard = ({ room }) => {
                     <button className="hotel-card__book-btn">Выбрать</button>
                 </div>
             </div>
-            <RoomDetailsModal
-                room={room}
-                isOpen={isDetailsOpen}
-                onClose={() => setIsDetailsOpen(false)}
-            />
         </div>
     );
 };

@@ -61,8 +61,16 @@ const MainPage = () => {
                             selected={checkInDate}
                             onChange={(date) => {
                                 setCheckInDate(date);
+                                if (checkOutDate && date >= checkOutDate) {
+                                    const nextDay = new Date(date);
+                                    nextDay.setDate(date.getDate() + 1); // Устанавливаем +1 день от заезда
+
+                                    setCheckOutDate(nextDay);
+                                    updateFilters({ endDate: nextDay });    
+                                }
+
                                 setActiveModal('checkOut');
-                                // Можно обновлять контекст сразу или только по кнопке
+
                                 updateFilters({ startDate: date });
                             }}
                             open={activeModal === 'checkIn'}
@@ -124,9 +132,9 @@ const MainPage = () => {
                                         <small>От 13 лет</small>
                                     </div>
                                     <div className="counter">
-                                        <button onClick={() => setGuests({...guests, adults: Math.max(1, guests.adults - 1)})}>-</button>
+                                        <button onClick={() => setGuests({ ...guests, adults: Math.max(1, guests.adults - 1) })}>-</button>
                                         <span className="count-number">{guests.adults}</span>
-                                        <button onClick={() => setGuests({...guests, adults: guests.adults + 1})}>+</button>
+                                        <button onClick={() => setGuests({ ...guests, adults: guests.adults + 1 })}>+</button>
                                     </div>
                                 </div>
 
@@ -136,9 +144,9 @@ const MainPage = () => {
                                         <small>До 12 лет</small>
                                     </div>
                                     <div className="counter">
-                                        <button onClick={() => setGuests({...guests, children: Math.max(0, guests.children - 1)})}>-</button>
+                                        <button onClick={() => setGuests({ ...guests, children: Math.max(0, guests.children - 1) })}>-</button>
                                         <span className="count-number">{guests.children}</span>
-                                        <button onClick={() => setGuests({...guests, children: guests.children + 1})}>+</button>
+                                        <button onClick={() => setGuests({ ...guests, children: guests.children + 1 })}>+</button>
                                     </div>
                                 </div>
                             </div>

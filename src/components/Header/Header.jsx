@@ -26,7 +26,7 @@ const Header = ({ OnOpenLogin }) => {
 
                 {/* Админка */}
                 {user?.isAdmin && (
-                    <NavLink to="/room" className="link--item">
+                    <NavLink to="/admin/edit-rooms" className="link--item">
                         <div className="link--content">
                             <BadIcon className="link--icon" />
                             <span>Управление номерами</span>
