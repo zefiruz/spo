@@ -23,7 +23,7 @@
 }
 
 /* Состояние "Пусто" */
-.booking-page p {
+/* .booking-page p {
     text-align: center;
     color: #717171;
     font-size: 1.2rem;
@@ -32,7 +32,7 @@
     padding: 40px;
     border-radius: 20px;
     border: 2px dashed #ddd;
-}
+} */
 
 
 .admin-booking-filters {

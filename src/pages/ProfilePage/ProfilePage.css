@@ -228,11 +228,11 @@ button {
 }
 
 
-.stat-card.pending .stat-value { 
+.stat-card.pending .stat-value {
     color: #f39c12; /* Оранжевый для "В обработке" */
 }
 
-.stat-card.total .stat-value { 
+.stat-card.total .stat-value {
     color: #34495e; /* Темно-серый для общего счета */
 }
 

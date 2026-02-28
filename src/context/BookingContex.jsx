@@ -46,6 +46,7 @@ export const BookingProvider = ({ children }) => {
         )
 
         setAllReservations([...allReservations, newBooking]);
+        alert('Заявка на бронирование успешно создана');    
         return true;
     };
     const cancelBooking = (bookingId) => {

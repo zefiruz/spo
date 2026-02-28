@@ -49,12 +49,7 @@ function App() {
           onClose={() => closeModal()} />}
 
 
-      <Routes>
-        <Route path="/unauthorized" element={
-          <div>У вас нет прав доступа к этой странице
-            <button className='primary-btn'>На главную</button>
-          </div>
-        } />
+      <Routes>  
         <Route path="/" element={<MainPage />} />
         <Route path="/booking" element={<SearchPage />} />
 
