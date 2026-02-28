@@ -7,7 +7,7 @@ import ProfileIcon from '../../lib/icons/account_circle.svg';
 
 const ProfilePage = () => {
     const { user, logout } = useAuth();
-    const { userReservations } = useBooking();
+    const { userReservations, allReservations } = useBooking();
     const navigate = useNavigate();
     const [showToast, setShowToast] = useState(false);
 
@@ -33,15 +33,23 @@ const ProfilePage = () => {
         return String(phone).match(/^(\+7|7|8)?[\s\-]?\(?[489][0-9]{2}\)?[\s\-]?([0-9]{3})[\s\-]?([0-9]{2})[\s\-]?([0-9]{2})$/);
     };
 
-   const stats = useMemo(() => {
+    const stats = useMemo(() => {
         if (!userReservations) return { total: 0, accepted: 0, pending: 0, cancelled: 0 };
+        if (user && user.isAdmin) {
+            return {
+                total: allReservations.length,
+                accepted: allReservations.filter(r => r.status === 'confirm').length,
+                pending: allReservations.filter(r => r.status === 'pending').length,
+                cancelled: allReservations.filter(r => r.status === 'cancelled').length,
+            }
+        }
         return {
             total: userReservations.length,
-            accepted: userReservations.filter(r => r.status === 'confirmed' || r.status === 'finished').length,
+            accepted: userReservations.filter(r => r.status === 'confirm').length,
             pending: userReservations.filter(r => r.status === 'pending').length,
             cancelled: userReservations.filter(r => r.status === 'cancelled').length,
         };
-}, [userReservations]);
+    }, [userReservations]);
 
     useEffect(() => {
         if (user) {

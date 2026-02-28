@@ -3,21 +3,25 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    flex-direction: column; /* Большая картинка сверху, список снизу */
-    gap: 12px; /* Расстояние между основным фото и миниатюрами */
+    flex-direction: column;
+    /* Большая картинка сверху, список снизу */
+    gap: 12px;
+    /* Расстояние между основным фото и миниатюрами */
     width: 100%;
 }
 
 /* Скругление для всех изображений в контейнере */
 .room-details__images-container img {
     border-radius: 12px;
-    object-fit: cover; /* Чтобы фото не искажались при изменении размера */
+    object-fit: cover;
+    /* Чтобы фото не искажались при изменении размера */
 }
 
 /* Большая центральная картинка */
 .images-container__main-img {
     width: 100%;
-    height: 350px; /* Можешь настроить высоту под себя */
+    height: 350px;
+    /* Можешь настроить высоту под себя */
     overflow: hidden;
     border-radius: 12px;
 }
@@ -25,7 +29,8 @@
 .images-container__main-img img {
     width: 100%;
     height: 100%;
-    transition: opacity 0.3s ease; /* Плавная смена фото */
+    transition: opacity 0.3s ease;
+    /* Плавная смена фото */
 }
 
 .room-details__small-images-container {
@@ -48,19 +53,23 @@
 
 /* Ховер эффект: увеличение */
 .img__item:hover {
-    transform: scale(1.25); /* Увеличение в 1.25 раза */
-    z-index: 10; /* Чтобы при увеличении картинка была над соседями */
+    transform: scale(1.25);
+    /* Увеличение в 1.25 раза */
+    z-index: 10;
+    /* Чтобы при увеличении картинка была над соседями */
 }
 
 /* Эффект выбранной картинки: белая маска (забеление) */
 .selected-img {
-    opacity: 50%; /* Можно добавить белую рамку для акцента */
+    opacity: 50%;
+    /* Можно добавить белую рамку для акцента */
 }
 
 /* Основной контейнер внутри модалки */
 .modal-content {
     display: flex;
-    flex-direction: row; /* Делим экран по горизонтали */
+    flex-direction: row;
+    /* Делим экран по горизонтали */
     gap: 30px;
     max-width: 900px;
     width: 95%;
@@ -81,7 +90,8 @@
     display: flex;
     flex-direction: column;
     text-align: left;
-    padding-right: 30px; /* Название и прочее прижато к левому краю */
+    padding-right: 30px;
+    /* Название и прочее прижато к левому краю */
 }
 
 /* Заголовок */
@@ -125,7 +135,8 @@
 
 /* Секция покупки (Цена и кнопка) */
 .room-details__buy-section {
-    margin-top: auto; /* Прижимает всю секцию к низу контейнера */
+    margin-top: auto;
+    /* Прижимает всю секцию к низу контейнера */
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -136,11 +147,68 @@
 /* Цена жирным */
 .buy-section__cost {
     font-size: 22px;
-    font-weight: 800; /* Очень жирный */
+    font-weight: 800;
+    /* Очень жирный */
     color: #222;
 }
 
+/* 1. Обертка (нужна для позиционирования градиента) */
+.description-wrapper {
+    position: relative;
+    margin: 15px 0;
+}
 
+/* 2. Контейнер со скроллом */
+.room-details__desc-container {
+    max-height: 200px;
+    /* Уменьшил для наглядности */
+    overflow-y: auto;
+    padding-right: 12px;
+
+    /* Скрываем стандартный скролл в Firefox */
+    scrollbar-width: none;
+}
+
+/* 3. Градиент (теперь он привязан к обертке и не мешает скроллу) */
+.description-wrapper::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: calc(100% - 6px);
+    /* Чтобы не перекрывал полосу прокрутки */
+    height: 40px;
+    background: linear-gradient(transparent, white);
+    pointer-events: none;
+    z-index: 2;
+}
+
+/* 4. Настройка "умного" скроллбара для Chrome/Safari */
+.room-details__desc-container::-webkit-scrollbar {
+    width: 6px;
+}
+
+.room-details__desc-container::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.room-details__desc-container::-webkit-scrollbar-thumb {
+    background: transparent;
+    /* Полностью прозрачный по умолчанию */
+    border-radius: 10px;
+    transition: all 0.3s ease;
+}
+
+/* Проявление при наведении */
+.room-details__desc-container:hover::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.2);
+    /* Еле заметный при наведении */
+}
+
+/* Активное состояние при прокрутке */
+.room-details__desc-container:active::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.4);
+}
 
 /* Адаптив: если экран маленький, колонки станут друг под друга */
 @media (max-width: 768px) {
@@ -149,9 +217,12 @@
         max-height: 90vh;
         overflow-y: auto;
     }
-    .room-details__container, .room-details__content-container {
+
+    .room-details__container,
+    .room-details__content-container {
         flex: 0 0 100%;
     }
+
     .room-detels__date-seletor {
         max-width: 100%;
     }

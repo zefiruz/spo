@@ -12,7 +12,7 @@ export const BookingProvider = ({ children }) => {
     const [allReservations, setAllReservations] = useLocalStorage("reservations", []);
     const { user } = useAuth();
     const { filters } = useFilters();
-    const {openNoContactsModal } = useModal();
+    const { openNoContactsModal } = useModal();
 
     const getAllReservations = () => allReservations;
 
@@ -27,8 +27,8 @@ export const BookingProvider = ({ children }) => {
     }, [allReservations, user]);
 
     const createBooking = (roomId) => {
-        if (!user) {
-            ("Необходимо войти в систему");
+        if (!user || user.isAdmin) {
+            openNoContactsModal();
             return false;
         }
         const profileData = JSON.parse(localStorage.getItem(`profile_data_${user.id}`));
@@ -59,8 +59,8 @@ export const BookingProvider = ({ children }) => {
         setAllReservations(prevReservations =>
             prevReservations.map(res =>
                 res.id === bookingId
-                    ? { ...res, status: newStatus } // Создаем новый объект с измененным статусом
-                    : res // Остальные оставляем как есть
+                    ? { ...res, status: newStatus }
+                    : res
             )
         );
     };
@@ -70,6 +70,7 @@ export const BookingProvider = ({ children }) => {
         userReservations,
         getRoomReservations,
         getAllReservations,
+        updateBookingStatus,
         createBooking,
         cancelBooking,
     };

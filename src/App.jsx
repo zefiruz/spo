@@ -11,7 +11,7 @@ import SearchPage from './pages/SearchPage/SearchPage'
 import BookingPage from './pages/BookingPage/BookingPage'
 import ProfilePage from './pages/ProfilePage/ProfilePage'
 import AdminRoomsPage from './pages/AdminRoomPage/AdminRoomPage'
-import {ProtectedRoute} from './components/ProtectedRoute'
+import { ProtectedRoute } from './components/ProtectedRoute'
 
 
 function App() {
@@ -50,11 +50,13 @@ function App() {
 
 
       <Routes>
-        <Route path="/unauthorized" element={<div>У вас нет прав доступа к этой странице</div>} />
-        <Route element={<ProtectedRoute allowedRoles={['user', 'guest']} />}>
-          <Route path="/" element={<MainPage />} />
-          <Route path="/booking" element={<SearchPage />} />
-        </Route>
+        <Route path="/unauthorized" element={
+          <div>У вас нет прав доступа к этой странице
+            <button className='primary-btn'>На главную</button>
+          </div>
+        } />
+        <Route path="/" element={<MainPage />} />
+        <Route path="/booking" element={<SearchPage />} />
 
 
         <Route element={<ProtectedRoute allowedRoles={['admin']} />}>

@@ -9,9 +9,9 @@ export const ReservationAdminCard = ({ Reservation }) => {
     const { cancelBooking, updateBookingStatus } = useBooking();
     const currentRoom = rooms.find(r => r.id === Reservation.roomId);
 
-    const handleApproveStatus = () => updateBookingStatus(Reservation.id, 'confirm');
+    const handleApproveStatus = () => { updateBookingStatus(Reservation.id, 'confirm') };
     const handleCancelBooking = () => {
-        if(window.confirm("Отклонить это бронирование?")) {
+        if (window.confirm("Отклонить это бронирование?")) {
             updateBookingStatus(Reservation.id, 'cancelled');
         }
     };
@@ -39,7 +39,7 @@ export const ReservationAdminCard = ({ Reservation }) => {
                     </>
                 )}
                 {Reservation.status !== 'pending' && (
-                    <div style={{color: '#999', fontSize: '13px', textAlign: 'center', width: '100%'}}>
+                    <div style={{ color: '#999', fontSize: '13px', textAlign: 'center', width: '100%' }}>
                         Решение принято
                     </div>
                 )}

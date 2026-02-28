@@ -1,24 +1,26 @@
+// context/ModalContext.jsx
 import React, { createContext, useContext, useState } from 'react';
 
 const ModalContext = createContext();
 
 export const ModalProvider = ({ children }) => {
-    const [noContactsOpen, setnoContactsOpen] = useState(false);
-    const [modalData, setModalData] = useState(null);
+    const [noContactsOpen, setNoContactsOpen] = useState(false);
+    const [authModal, setAuthModal] = useState(null); // 'login', 'signup' или null
 
-    // Функция для открытия
-    const openNoContactsModal = () => {
-        setnoContactsOpen(true);
-    };
+    // Методы для контактов
+    const openNoContactsModal = () => setNoContactsOpen(true);
+    const closeNoContactsModal = () => setNoContactsOpen(false);
 
-    // Функция для закрытия
-    const closeNoContactsModal = () => {
-        setnoContactsOpen(false);
-        setModalData(null);
-    };
+    // Методы для авторизации
+    const openLogin = () => setAuthModal('login');
+    const openSignup = () => setAuthModal('signup');
+    const closeAuth = () => setAuthModal(null);
 
     return (
-        <ModalContext.Provider value={{ noContactsOpen, openNoContactsModal, closeNoContactsModal }}>
+        <ModalContext.Provider value={{
+            noContactsOpen, openNoContactsModal, closeNoContactsModal,
+            authModal, openLogin, openSignup, closeAuth
+        }}>
             {children}
         </ModalContext.Provider>
     );
